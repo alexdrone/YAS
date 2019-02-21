@@ -73,7 +73,7 @@ Example:
   animator1: animator(1,easeIn)
 ```
 
-### References and 
+### References and anchors
 
 By using YAML anchors and references you can reuse values across your stylesheet:
 
