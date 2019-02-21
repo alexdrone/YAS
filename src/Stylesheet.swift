@@ -3,9 +3,6 @@ import Foundation
 import UIKit
 #endif
 
-/// Shorthand for the stylesheet singleton.
-public let S = StylesheetManager();
-
 public enum ParseError: Error {
   /// Illegal format for the stylesheet.
   case malformedStylesheetStructure(message: String?)
@@ -41,6 +38,10 @@ public final class StylesheetManager {
     return animators[style]?[name]
   }
   #endif
+
+  init() {
+    // Internal constructor.
+  }
 
   private func loadFileFromRemoteServer(_ file: String) -> String? {
     guard let url = URL(string: "\(debugRemoteUrl)\(file).yaml") else { return nil }
