@@ -7,7 +7,8 @@ public struct Yas {
   static let lookup = StyleDynamicLookup()
 }
 
-@dynamicMemberLookup public struct RuleDynamicLookup {
+@dynamicMemberLookup
+public struct RuleDynamicLookup {
   /// The style name.
   public let id: String
   /// Returns the current style.
@@ -33,7 +34,8 @@ public struct Yas {
   }
 }
 
-@dynamicMemberLookup public struct StyleDynamicLookup  {
+@dynamicMemberLookup
+public struct StyleDynamicLookup  {
   public subscript(dynamicMember member: String) -> RuleDynamicLookup {
     return RuleDynamicLookup(id: member)
   }
