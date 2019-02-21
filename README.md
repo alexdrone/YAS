@@ -33,7 +33,7 @@ FooStyle:
   margin: 10.0
 ```
 
-Now just load it up and use it in your Swift code:
+Load it up and use it in your Swift code:
 
 ```
 try! Yas.manager.load("style.yaml")
@@ -41,12 +41,61 @@ let margin = Yas.lookup.FooStyle.margin //10.0
 let backgroundColor = Yas.lookup.FooStyle.backgroundColor //UIColor(...)
 ```
 
-You can also apply a style to a `UIView`:
+Apply a style to a `UIView`:
 
 ```
 view.apply(style: Yas.lookup.FooStyle)
 ```
 
+### Primitives
+
+```
+Example:
+  cgFloat: 42.0
+  bool: true
+  integer: 42
+  # Symbols can be exported by calling ConstExpr.export([:])
+  enum: ${NSTextAlignment.right}
+  # ${...} is the expression delimiter
+  cgFloatExpression: ${41+1}
+  boolExpression: ${1 == 1 && true}
+  integerExpression: ${41+1}
+  # Functions.
+  # New functions can be exported by calling FuncExpr.export(...)
+  # `color(string [color hexcode])`: Returns a color.
+  color: "color(#ff0000)"
+  # `font(string [font name or `system`], number [point size])`
+  font: font(Arial,42)
+  # `systemfont(number [point size], weight [ultralight, thin, ..., black])`
+  systemFont: systemfont(12,bold)
+  # `animator(number [duration], string [easeIn, easeOut, easeInOut, linear])` or
+  # `animator(number [duration], number [damping])`
+  animator1: animator(1,easeIn)
+```
+
+### References and 
+
+By using YAML anchors and references you can reuse values across your stylesheet:
+
+```
+Foo:
+  fooValue: &_fooValue 42.0
+Bar
+  bar: *_fooValue
+  baz: 2
+```
+
+You can also copy the whole style using the YAML extension construct:
+
+```
+Foo: &_Foo
+  aValue: 42.0
+  anotherValue: "Hello"
+  someColor: color(#cacaca)
+Bar
+  <<: *_Foo
+  yetAnotherValue: 2
+```
 
 # Credits:
 
