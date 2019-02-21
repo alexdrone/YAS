@@ -40,3 +40,6 @@ targets:
       configFiles:
         Debug: configs/Debug.xcconfig
         Release: configs/Release.xcconfig
+    postbuildScripts:
+          - name: Dist
+          - script: NAME="YAS";PRODUCT="${BUILT_PRODUCTS_DIR}";cp -R "${PRODUCT}/${NAME}.framework" ./bin;cp -R "${PRODUCT}/${NAME}.framework.dSYM" ./bin;cd ./bin;zip -r dist.zip *;

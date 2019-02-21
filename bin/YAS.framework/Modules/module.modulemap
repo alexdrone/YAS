@@ -1,0 +1,11 @@
+framework module YAS {
+  umbrella header "YAS.h"
+
+  export *
+  module * { export * }
+}
+
+module YAS.Swift {
+    header "YAS-Swift.h"
+    requires objc
+}

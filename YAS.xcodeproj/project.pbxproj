@@ -7,17 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16D4143A221EC24400BC25F3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D41439221EC24400BC25F3 /* View.swift */; };
-		16D4143B221EC24400BC25F3 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D41439221EC24400BC25F3 /* View.swift */; };
-		16D4143E221ECB0D00BC25F3 /* YASObjcExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 16D4143C221ECB0D00BC25F3 /* YASObjcExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16D4143F221ECB0D00BC25F3 /* YASObjcExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 16D4143C221ECB0D00BC25F3 /* YASObjcExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16D41440221ECB0D00BC25F3 /* YASObjcExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4143D221ECB0D00BC25F3 /* YASObjcExceptionHandler.m */; };
-		16D41441221ECB0D00BC25F3 /* YASObjcExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4143D221ECB0D00BC25F3 /* YASObjcExceptionHandler.m */; };
 		BF_02E792D69455A65D9BBBFC9E09817C56 /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF_15A4BDC4897B40327ED51B4557411078 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */; };
 		BF_1C5E5C64D385AB86B0E90312B9C5D075 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */; };
 		BF_2B6C012F4D11CE69B5E1EB94BD8C190D /* FuncExpr+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_DBA555BDAAB3205870FA70B51F3E5C16 /* FuncExpr+Common.swift */; };
+		BF_2D6C3ED5D758691F04FFF47E5EB8D666 /* YASObjcExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */; };
 		BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YamlBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */; };
+		BF_3A5F48FBBF75BCCD6428CDF34B5FD82F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */; };
 		BF_3C165767B4CFCF92F77F05E9F9D94C78 /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF_3EC05748C794D6269439C3B1AB89CF38 /* YamlBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */; };
 		BF_40804E18C44073A87E55D437FCBA7EFF /* ConstExpr+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2E461868D3E36DEBCA1A75B3E4B47D99 /* ConstExpr+Common.swift */; };
@@ -29,6 +25,7 @@
 		BF_67987085F27936784ECC77BCB50DE05D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_E3D880A2B16E1EA83632480A2566B1B4 /* Utils.swift */; };
 		BF_6BC0E7F5F6579A5FE86A79E7275FB48A /* FuncExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_4F0EDEB84DC0BBB925DF562B3E9E669D /* FuncExpr.swift */; };
 		BF_6F8A18099BEA63510D62F1EF5E950E13 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_6570520349432ED97E845E864B116236 /* Test.swift */; };
+		BF_7045A0CCAAF5F7B918891A631F08B185 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */; };
 		BF_70E93881EED439D0CCE2423BB9B335B5 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_DAE8550EF84CAE0D35F08693FD799E2A /* Stylesheet.swift */; };
 		BF_730F5A04861CBCC7C521E7F416835314 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_F2D8A64D4E1E66F538CE657EB3C94521 /* Rule.swift */; };
 		BF_7982F3A1DD5F0BCC765D4F84C4EB4919 /* YAS.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_63BF52D9CC585680BB3A5ECC1D300EE3 /* YAS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,11 +33,14 @@
 		BF_9B698CE5892D258C2D4C44D40CF046DC /* FuncExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_4F0EDEB84DC0BBB925DF562B3E9E669D /* FuncExpr.swift */; };
 		BF_A1B5316033E7C4B922FB58E3FB62C4FA /* YAS.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_63BF52D9CC585680BB3A5ECC1D300EE3 /* YAS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF_A2C3D345D3E3EB1337083623F96CABE7 /* yaml.c in Sources */ = {isa = PBXBuildFile; fileRef = FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */; };
+		BF_A768ABA765BDBDDDE0308695107D42A6 /* YASObjcExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF_A8F5F810A3C24FF63DBB05D204516623 /* YASObjcExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */; };
 		BF_B9CD945DBFC53E917AC9D6B1E6C81018 /* Stylesheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_DAE8550EF84CAE0D35F08693FD799E2A /* Stylesheet.swift */; };
 		BF_BE215F1E373D1A90F4D25493B02EDCD0 /* ConstExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_FBA214F18F991337ACD96FC940237CA1 /* ConstExpr.swift */; };
 		BF_C45D7854E3B5912ABF6C3E3D918E25C5 /* ConstExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_FBA214F18F991337ACD96FC940237CA1 /* ConstExpr.swift */; };
 		BF_D24600C280EBF3E6C662C25DE324866E /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_92C1540A7CF8506B0D3F727079A868E4 /* Screen.swift */; };
 		BF_D3DD892529D7BB23DF713ACDA8E95E52 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_E3D880A2B16E1EA83632480A2566B1B4 /* Utils.swift */; };
+		BF_E606BC3B369BA1726E510394CCAA3976 /* YASObjcExceptionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF_ED0E0B69742A42B6771095AD14415C90 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_F2D8A64D4E1E66F538CE657EB3C94521 /* Rule.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,19 +69,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		16D41439221EC24400BC25F3 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		16D4143C221ECB0D00BC25F3 /* YASObjcExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YASObjcExceptionHandler.h; sourceTree = "<group>"; };
-		16D4143D221ECB0D00BC25F3 /* YASObjcExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YASObjcExceptionHandler.m; sourceTree = "<group>"; };
 		FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		FR_2E461868D3E36DEBCA1A75B3E4B47D99 /* ConstExpr+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstExpr+Common.swift"; sourceTree = "<group>"; };
+		FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YASObjcExceptionHandler.m; sourceTree = "<group>"; };
 		FR_4F0EDEB84DC0BBB925DF562B3E9E669D /* FuncExpr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncExpr.swift; sourceTree = "<group>"; };
 		FR_5F3A7219B9FA1D6C34C4E6B753242D65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FR_6333287BDDE10674392E8F1AAEEF843D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FR_63BF52D9CC585680BB3A5ECC1D300EE3 /* YAS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAS.h; sourceTree = "<group>"; };
 		FR_6570520349432ED97E845E864B116236 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = yaml.h; sourceTree = "<group>"; };
-		FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = yaml.c; sourceTree = "<group>"; };
+		FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */ = {isa = PBXFileReference; path = yaml.c; sourceTree = "<group>"; };
 		FR_92C1540A7CF8506B0D3F727079A868E4 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YASObjcExceptionHandler.h; sourceTree = "<group>"; };
 		FR_A5CB0BEDC02F732BAB5A2707FF1A01BD /* YAS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YAS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlBridge.swift; sourceTree = "<group>"; };
 		FR_D5BCA78100C503C43041FECE74A50794 /* Test.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +117,7 @@
 				FR_92C1540A7CF8506B0D3F727079A868E4 /* Screen.swift */,
 				FR_DAE8550EF84CAE0D35F08693FD799E2A /* Stylesheet.swift */,
 				FR_E3D880A2B16E1EA83632480A2566B1B4 /* Utils.swift */,
-				16D41439221EC24400BC25F3 /* View.swift */,
+				FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */,
 				FR_63BF52D9CC585680BB3A5ECC1D300EE3 /* YAS.h */,
 				G_9429792896B3BF2456DECF9BF00498B2 /* deps */,
 			);
@@ -127,12 +127,12 @@
 		G_9429792896B3BF2456DECF9BF00498B2 /* deps */ = {
 			isa = PBXGroup;
 			children = (
-				16D4143C221ECB0D00BC25F3 /* YASObjcExceptionHandler.h */,
-				16D4143D221ECB0D00BC25F3 /* YASObjcExceptionHandler.m */,
 				FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */,
 				FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */,
 				FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */,
 				FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */,
+				FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */,
+				FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */,
 			);
 			path = deps;
 			sourceTree = "<group>";
@@ -175,8 +175,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF_A1B5316033E7C4B922FB58E3FB62C4FA /* YAS.h in Headers */,
+				BF_E606BC3B369BA1726E510394CCAA3976 /* YASObjcExceptionHandler.h in Headers */,
 				BF_02E792D69455A65D9BBBFC9E09817C56 /* yaml.h in Headers */,
-				16D4143E221ECB0D00BC25F3 /* YASObjcExceptionHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +185,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF_7982F3A1DD5F0BCC765D4F84C4EB4919 /* YAS.h in Headers */,
+				BF_A768ABA765BDBDDDE0308695107D42A6 /* YASObjcExceptionHandler.h in Headers */,
 				BF_3C165767B4CFCF92F77F05E9F9D94C78 /* yaml.h in Headers */,
-				16D4143F221ECB0D00BC25F3 /* YASObjcExceptionHandler.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +199,7 @@
 			buildPhases = (
 				HBP_66C6CAFD6E4AF8C815ECA7BC42DE020A /* Headers */,
 				SBP_C0698726E2F15A64E9F70B10296FDC12 /* Sources */,
+				SSBP_920CDA46777DDCD6D475E1B343DFEFA8 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -233,6 +234,7 @@
 			buildPhases = (
 				HBP_0291A507EE374B4BDA1E619D255589A3 /* Headers */,
 				SBP_F0C0E0EFEE86065117A35A284F6495ED /* Sources */,
+				SSBP_BBAEDB7674E36A3A6831B8F47E332146 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -269,6 +271,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		SSBP_920CDA46777DDCD6D475E1B343DFEFA8 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "NAME=\"YAS\";PRODUCT=\"${BUILT_PRODUCTS_DIR}\";cp -R \"${PRODUCT}/${NAME}.framework\" ./bin;cp -R \"${PRODUCT}/${NAME}.framework.dSYM\" ./bin;cd ./bin;zip -r dist.zip *;";
+		};
+		SSBP_BBAEDB7674E36A3A6831B8F47E332146 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "NAME=\"YAS\";PRODUCT=\"${BUILT_PRODUCTS_DIR}\";cp -R \"${PRODUCT}/${NAME}.framework\" ./bin;cp -R \"${PRODUCT}/${NAME}.framework.dSYM\" ./bin;cd ./bin;zip -r dist.zip *;";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		SBP_8AB878E84772FE9F55753E619E761DB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -291,9 +324,9 @@
 				BF_D24600C280EBF3E6C662C25DE324866E /* Screen.swift in Sources */,
 				BF_70E93881EED439D0CCE2423BB9B335B5 /* Stylesheet.swift in Sources */,
 				BF_D3DD892529D7BB23DF713ACDA8E95E52 /* Utils.swift in Sources */,
-				16D41441221ECB0D00BC25F3 /* YASObjcExceptionHandler.m in Sources */,
+				BF_7045A0CCAAF5F7B918891A631F08B185 /* View.swift in Sources */,
+				BF_2D6C3ED5D758691F04FFF47E5EB8D666 /* YASObjcExceptionHandler.m in Sources */,
 				BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YamlBridge.swift in Sources */,
-				16D4143B221EC24400BC25F3 /* View.swift in Sources */,
 				BF_A2C3D345D3E3EB1337083623F96CABE7 /* yaml.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,9 +344,9 @@
 				BF_5E3D0E4B7FA84D8BCC6ABDD94B9438E0 /* Screen.swift in Sources */,
 				BF_B9CD945DBFC53E917AC9D6B1E6C81018 /* Stylesheet.swift in Sources */,
 				BF_67987085F27936784ECC77BCB50DE05D /* Utils.swift in Sources */,
-				16D41440221ECB0D00BC25F3 /* YASObjcExceptionHandler.m in Sources */,
+				BF_3A5F48FBBF75BCCD6428CDF34B5FD82F /* View.swift in Sources */,
+				BF_A8F5F810A3C24FF63DBB05D204516623 /* YASObjcExceptionHandler.m in Sources */,
 				BF_3EC05748C794D6269439C3B1AB89CF38 /* YamlBridge.swift in Sources */,
-				16D4143A221EC24400BC25F3 /* View.swift in Sources */,
 				BF_4BBC5DBBCB9216A63C832840F99B1380 /* yaml.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
