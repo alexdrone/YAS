@@ -1,0 +1,42 @@
+name: YAS
+options:
+  deploymentTarget:
+    iOS: 10.0
+    macOS: 10.12
+  usesTabs: false
+  indentWidth: 2
+targets:
+  Test:
+    platform: iOS
+    type: bundle.unit-test
+    sources:
+      - test
+    dependencies:
+      - target: YAS_iOS
+    scheme:
+      testTargets:
+        - Test
+      gatherCoverageData: true
+      environmentVariables:
+        - variable: TEST
+          value: YES
+          isEnabled: true
+  YAS:
+    platform: [iOS, macOS]
+    type: framework
+    sources: 
+      - src
+    settings:
+      base:
+        INFOPLIST_FILE: src/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: io.alexdrone.yas
+        PLATFORM: platform $platform        
+        GCC_GENERATE_DEBUGGING_SYMBOLS: YES
+        GCC_DEBUGGING_SYMBOLS: full,
+        DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+        ONLY_ACTIVE_ARCH: NO
+        SWIFT_OPTIMIZATION_LEVEL: -Owholemodule
+        SWIFT_VERSION: 4.2
+      configFiles:
+        Debug: configs/Debug.xcconfig
+        Release: configs/Release.xcconfig
