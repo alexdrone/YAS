@@ -15,7 +15,7 @@ Drag `YAS.framework` in your project and add it as an embedded binary.
 
 If you use [xcodegen](https://github.com/yonaskolb/XcodeGen) add the framework to your *project.yml* like so:
 
-```
+```yaml
 targets:
   YOUR_APP_TARGET:
     ...
