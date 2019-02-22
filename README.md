@@ -6,7 +6,7 @@
 
 ### Installing the framework
 
-```
+```bash
 cd {PROJECT_ROOT_DIRECTORY}
 curl "https://raw.githubusercontent.com/alexdrone/YAS/master/bin/dist.zip" > dist.zip && unzip dist.zip && rm dist.zip;
 ```
