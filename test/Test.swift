@@ -112,10 +112,10 @@ Test:
   boolExpr: ${1 == 1 && true}
   integerExpr: ${41+1}
   const: ${iPhoneSE.width}
-  color: "color(#ff0000)"
-  font: font(Arial,42)
-  fontWeight: systemfont(12,bold)
-  animator1: animator(1,easeIn)
+  color: {type: color, hex: ff0000}
+  font: {type: font, name: Arial, size: 42}
+  fontWeight: {type: font, weight: bold, size: 12}
+  animator1: {type: animator, curve: easeIn, duration: 1}
 Foo: &_Foo
   foo:  1
 Bar:
@@ -131,7 +131,7 @@ Foo:
 """
 let viewDefs = """
 View:
-  backgroundColor: color(#ff0000)
+  backgroundColor: {type: color, hex: ff0000}
   layer.borderWidth: 1
   flexDirection: ${row}
   margin: 10

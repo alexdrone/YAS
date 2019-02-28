@@ -60,17 +60,15 @@ Example:
   cgFloatExpression: ${41+1}
   boolExpression: ${1 == 1 && true}
   integerExpression: ${41+1}
-  # Functions.
-  # New functions can be exported by calling FuncExpr.export(...)
-  # `color(string [color hexcode])`: Returns a color.
-  color: "color(#ff0000)"
-  # `font(string [font name or `system`], number [point size])`
-  font: font(Arial,42)
-  # `systemfont(number [point size], weight [ultralight, thin, ..., black])`
-  systemFont: systemfont(12,bold)
-  # `animator(number [duration], string [easeIn, easeOut, easeInOut, linear])` or
-  # `animator(number [duration], number [damping])`
-  animator1: animator(1,easeIn)
+  # Custom objects..
+  # New functions can be exported by calling ObjectExpr.export(...)
+  # {type: color, hex: ffffff, (darken: [0-100]), (lighten: [0-100]), (alpha: [0-1])}
+  color: {type: color, hex: ff0000}
+  # {type: font, (name: [fontname]), size: [size], (weight: [light...])}
+  font:  {type: font, name: Arial, size: 42}
+  fontWeight: {type: font, weight: bold, size: 12}
+  # {type: animator, duration: 1, (curve: [easeIn...]), (damping: [0-1])}
+  animator1: {type: animator, curve: easeIn, duration: 1}
 ```
 
 ### References and anchors

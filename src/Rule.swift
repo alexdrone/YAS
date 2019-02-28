@@ -167,24 +167,29 @@ public class Rule: CustomStringConvertible {
         return (result.0, result.1)
       }
     }
+    if let _ = yaml.mapping {
+      return try parse(mapping: yaml)
+    }
     return (.undefined, nil)
   }
 
   /// Parse a string value.
-  /// - `func(args...)` to evaluate a function.
   /// - `${expression}` to evaluate an expression.
   /// - A string.
   private func parse(string: String) throws -> (ValueType, Any?) {
-    /// - `func(args...)` to evaluate a function.
-    for function in FuncExpr.registry.functions {
-      if !function.match(format: string) { continue }
-      return function.evaluate(format: string)
-    }
     // - `${expression}` to evaluate an expression.
     if let exprString = ConstExpr.sanitize(expression: string) {
       return (.expression, ConstExpr.builder(exprString))
     }
     return (.string, string)
+  }
+
+  /// Parse an object.
+  private func parse(mapping: YAMLNode) throws -> (ValueType, Any?) {
+    guard mapping.isMapping else {
+      return (.undefined, nil)
+    }
+    return ObjectExprRegistry.default.eval(fromYaml:mapping)
   }
 
   /// A textual representation of this instance.
