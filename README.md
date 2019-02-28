@@ -60,8 +60,8 @@ Example:
   cgFloatExpression: ${41+1}
   boolExpression: ${1 == 1 && true}
   integerExpression: ${41+1}
-  # Custom objects..
-  # New functions can be exported by calling ObjectExpr.export(...)
+  # Custom objects.
+  # New object types can be exported by calling ObjectExpr.export(...)
   # {type: color, hex: ffffff, (darken: [0-100]), (lighten: [0-100]), (alpha: [0-1])}
   color: {type: color, hex: ff0000}
   # {type: font, (name: [fontname]), size: [size], (weight: [light...])}
