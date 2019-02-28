@@ -6,7 +6,7 @@
 
 ### Installing the framework
 
-```
+```bash
 cd {PROJECT_ROOT_DIRECTORY}
 curl "https://raw.githubusercontent.com/alexdrone/YAS/master/bin/dist.zip" > dist.zip && unzip dist.zip && rm dist.zip;
 ```
@@ -15,7 +15,7 @@ Drag `YAS.framework` in your project and add it as an embedded binary.
 
 If you use [xcodegen](https://github.com/yonaskolb/XcodeGen) add the framework to your *project.yml* like so:
 
-```
+```yaml
 targets:
   YOUR_APP_TARGET:
     ...
@@ -27,7 +27,7 @@ targets:
 
 Let's create a very basic YAML stylesheet and save it in a file named `style.yaml`.
 
-```
+```yaml
 FooStyle:
   backgroundColor: color(ff0000)
   margin: 10.0
@@ -35,7 +35,7 @@ FooStyle:
 
 Load it up and use it in your Swift code:
 
-```
+```swift
 try! Yas.manager.load("style.yaml")
 let margin = Yas.lookup.FooStyle.margin //10.0
 let backgroundColor = Yas.lookup.FooStyle.backgroundColor //UIColor(...)
@@ -43,13 +43,13 @@ let backgroundColor = Yas.lookup.FooStyle.backgroundColor //UIColor(...)
 
 Apply a style to a `UIView`:
 
-```
+```swift
 view.apply(style: Yas.lookup.FooStyle)
 ```
 
 ### Primitives
 
-```
+```yaml
 Example:
   cgFloat: 42.0
   bool: true
@@ -75,7 +75,7 @@ Example:
 
 By using YAML anchors and references you can reuse values across your stylesheet:
 
-```
+```yaml
 Foo:
   fooValue: &_fooValue 42.0
 Bar
@@ -85,7 +85,7 @@ Bar
 
 You can also copy the whole style using the YAML extension construct:
 
-```
+```yaml
 Foo: &_Foo
   aValue: 42.0
   anotherValue: "Hello"
