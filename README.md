@@ -29,7 +29,7 @@ Let's create a very basic YAML stylesheet and save it in a file named `style.yam
 
 ```yaml
 FooStyle:
-  backgroundColor: color(ff0000)
+  backgroundColor: {type: color, hex: ff0000}
   margin: 10.0
 ```
 
