@@ -109,9 +109,9 @@ Bar:
 ```yaml
 Palette:
   primaryColorHex: &_primaryColorHex ff0000
-  primaryColor: &_primaryColor {type: color, hex: *primaryColorHex}
-  primaryColor600: &_primaryColor600 {type: color, hex: *primaryColorHex, darken: 10}
-  primaryColor700: &_primaryColor700 {type: color, hex: *primaryColorHex, darken: 20}
+  primaryColor: &_primaryColor {type: color, hex: *_primaryColorHex}
+  primaryColor600: &_primaryColor600 {type: color, hex: *_primaryColorHex, darken: 10}
+  primaryColor700: &_primaryColor700 {type: color, hex: *_primaryColorHex, darken: 20}
 Typography:
   primaryFontName: &_primaryFontName "Open Sans"
   secondaryFontName: &_secondaryFontName "Rubik"
