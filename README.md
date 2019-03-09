@@ -76,7 +76,7 @@ Example:
   fontWeight: {type: font, weight: bold, size: 12}
   # {type: animator, duration: 1, (curve: [easeIn...]), (damping: [0-1])}
   animator: {type: animator, curve: easeIn, duration: 1}
-  # {type: attributedString,  (name: [fontname]), size: [size], (weight: [light...]), (kern: [0..n]), (hex: [hex colorcode])}
+  # {type: attributedString,  (name: [fontname]), size: [size], (weight: [light...]), (kern: [0..n]), (hex: [hex colorcode]), (supportDynamicType: [bool])}
   attributedString: {type: attributedString, name: Arial, size: 42, kern: 2, hex: ff0000}
 ```
 
