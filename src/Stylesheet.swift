@@ -4,81 +4,47 @@ import UIKit
 #endif
 
 public enum ParseError: Error {
-  /// Illegal format for the stylesheet.
+  /// The filename is not set.
+  case fileNotSet
+  /// The file was not found in the bundle.
+  case fileNotFound(file: String)
+  /// Illegal stylesheet format
   case malformedStylesheetStructure(message: String?)
-  /// An illegal use of a `!!func` in the stylesheet.
-  case illegalNumberOfArguments(function: String?)
 }
 
 public final class StylesheetManager {
   /// Singleton instance.
   public static let `default` = StylesheetManager()
-
   /// The stylesheet file currently loaded.
   private var file: String?
-  /// The default debug remote fetch url.
-  public var debugRemoteUrl: String = "http://localhost:8000/"
+  /// The reource bundle where the stylesheet is located.
+  private var bundle: Bundle?
   /// The parsed *Yaml* document.
   public var defs: [String: [String: Rule]] = [:]
-#if canImport(UIKit)
-  /// The parent container size for the current context.
-  public private(set) var parentSize: CGSize = .zero
-  /// Available animators.
-  public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
-#endif
+
+  init() {
+    // Internal constructor.
+  }
+
+  // MARK: Public
 
   /// Returns the rule named 'name' of a specified style.
   public func rule(style: String, name: String) -> Rule? {
     return defs[style]?[name]
   }
 
-  #if canImport(UIKit)
-  /// Returns the rule named 'name' of a specified style.
-  public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
-    return animators[style]?[name]
-  }
-  #endif
-
-  init() {
-    // Internal constructor.
-  }
-
-  private func loadFileFromRemoteServer(_ file: String) -> String? {
-    guard let url = URL(string: "\(debugRemoteUrl)\(file).yaml") else { return nil }
-    return try? String(contentsOf: url, encoding: .utf8)
-  }
-
-  private func loadFileFromBundle(_ file: String) -> String? {
-    guard let leaf = file.components(separatedBy: "/").last else { return nil }
-    guard let path = Bundle.main.path(forResource: leaf, ofType: "yaml") else { return nil }
-    return try? String(contentsOfFile: path, encoding: .utf8)
-  }
-
-  private func resolve(file: String) -> String {
-    #if targetEnvironment(simulator)
-    if let content = loadFileFromRemoteServer(file) {
-      return content
-    } else if let content = loadFileFromBundle(file) {
-      return content
-    }
-    #else
-    if let content = loadFileFromBundle(file) {
-      return content
-    }
-    #endif
-    return ""
-  }
-
   /// Loads the yaml stylesheet.
-  public func load(file: String?) throws {
-    if file != nil {
-      self.file = file
+  public func load(file: String, bundle: Bundle = Bundle.main) throws {
+    self.file = file
+    try load(yaml: resolve(file: file, bundle: bundle))
+  }
+
+  /// Reloads the yaml stylesheet.
+  public func reload() throws {
+    guard let file = file, let bundle = bundle else {
+      throw ParseError.fileNotSet
     }
-    guard let file = file ?? self.file else {
-      print("nil filename.")
-      return
-    }
-    try load(yaml: resolve(file: file))
+    try load(file: file, bundle: bundle)
   }
 
   /// Parses the markup content passed as argument.
@@ -112,7 +78,7 @@ public final class StylesheetManager {
         guard let fileName = imported.string?.replacingOccurrences(of: ".yaml", with: "") else {
           continue
         }
-        content += resolve(file: fileName)
+        content += try resolve(file: fileName, bundle: bundle!)
       }
     }
 
@@ -167,9 +133,34 @@ public final class StylesheetManager {
     debugLoadTime("Stylesheet.load", startTime: startTime)
   }
 
+  // MARK: Private
+
+  /// Reads the file from the app bundle.
+  private func resolve(file: String, bundle: Bundle) throws -> String {
+    guard
+      let leaf = file.components(separatedBy: "/").last,
+      let path = bundle.path(forResource: leaf, ofType: "yaml") else {
+        throw ParseError.fileNotFound(file: file)
+    }
+    return try String(contentsOfFile: path, encoding: .utf8)
+  }
+
   private func debugLoadTime(_ label: String, startTime: CFAbsoluteTime){
     let timeElapsed = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
     print(String(format: "\(label) (%2f) ms.", arguments: [timeElapsed]))
   }
 
+  // MARK: UIKit
+
+  #if canImport(UIKit)
+  /// The parent container size for the current context.
+  public private(set) var parentSize: CGSize = .zero
+  /// Available animators.
+  public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
+
+  /// Returns the rule named 'name' of a specified style.
+  public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
+    return animators[style]?[name]
+  }
+  #endif
 }

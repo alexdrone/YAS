@@ -96,15 +96,17 @@ public struct ConstExpr {
       UIImage.ResizingMode.export()
       UIView.ContentMode.export()
     }
-    return Expression(string,
-                      options: [Expression.Options.boolSymbols, Expression.Options.pureSymbols],
-                      constants: ConstExpr.exportedConstants,
-                      symbols: ConstExpr.defaultSymbols)
+    return Expression(
+      string,
+      options: [Expression.Options.boolSymbols, Expression.Options.pureSymbols],
+      constants: ConstExpr.exportedConstants,
+      symbols: ConstExpr.defaultSymbols)
     #else
-    return Expression(string,
-                      options: [Expression.Options.boolSymbols, Expression.Options.pureSymbols],
-                      constants: ConstExpr.exportedConstants,
-                      symbols: [:])
+    return Expression(
+      string,
+      options: [Expression.Options.boolSymbols, Expression.Options.pureSymbols],
+      constants: ConstExpr.exportedConstants,
+      symbols: [:])
     #endif
   }
 
