@@ -151,7 +151,7 @@ MyStyle:
   myCustomRule: {type: myObject, foo: 42, bar: "Hello"}
 ```
 
-# Credits:
+### Dependencies and credits
 
 Deps forked from:
 
