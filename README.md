@@ -86,7 +86,7 @@ By using YAML anchors and references you can reuse values across your stylesheet
 ```yaml
 Foo:
   fooValue: &_fooValue 42.0
-Bar
+Bar:
   bar: *_fooValue
   baz: 2
 ```
@@ -98,7 +98,7 @@ Foo: &_Foo
   aValue: 42.0
   anotherValue: "Hello"
   someColor: color(#cacaca)
-Bar
+Bar:
   <<: *_Foo
   yetAnotherValue: 2
 ```
