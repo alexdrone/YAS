@@ -66,6 +66,10 @@ public struct ConstExpr {
       Double(Screen.SizeClass.verticalSizeClass().rawValue) },
     .variable("horizontalSizeClass"): { _ in
       Double(Screen.SizeClass.horizontalSizeClass().rawValue) },
+    .variable("screenSize.height"): { _ in
+      Double(Screen.default.state().screenSize.height) },
+    .variable("screenSize.width"): { _ in
+      Double(Screen.default.state().screenSize.width) },
     .variable("parentSize.height"): { _ in
       Double(StylesheetManager.default.parentSize.height) },
     .variable("parentSize.width"): { _ in

@@ -98,10 +98,32 @@ You can also copy the whole style using the YAML extension construct:
 Foo: &_Foo
   aValue: 42.0
   anotherValue: "Hello"
-  someColor: color(#cacaca)
+  someColor: {type: color, hex: ff0000}
 Bar:
   <<: *_Foo
   yetAnotherValue: 2
+```
+
+#### Real life example
+
+```yaml
+Palette:
+  primaryColorHex: &_primaryColorHex ff0000
+  primaryColor: &_primaryColor {type: color, hex: *primaryColorHex}
+  primaryColor600: &_primaryColor600 {type: color, hex: *primaryColorHex, darken: 10}
+  primaryColor700: &_primaryColor700 {type: color, hex: *primaryColorHex, darken: 20}
+Typography:
+  primaryFontName: &_primaryFontName "Open Sans"
+  secondaryFontName: &_secondaryFontName "Rubik"
+  body1: &_body1 {type: attributedString, name: *_secondaryFontName, size: 14.26, kern: 0.25, color: *_primaryColorHex}
+  body2: &_body2 {type: attributedString, weight: medium, size: 12.22, kern: 0.5, color: *_primaryColorHex}
+LandingPage:
+  titleText: *_body1
+  backgroundColor: *_primaryColor600
+  topMargin: 12
+  shouldHideHero: ${horizontalSizeClass == compact}
+  tileSize: ${screenSize.width/2 - 8}  
+
 ```
 
 ### Cascade imports
