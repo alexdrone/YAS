@@ -134,7 +134,7 @@ subclass.
 }
 ```
 
-Finally register your `ObjectExpr`
+Finally register your `ObjectExpr` in the shared `ObjectExprRegistry`.
 
 ```swift
 ObjectExprRegistry.default.export(ObjectExprFactory(
@@ -143,7 +143,7 @@ ObjectExprRegistry.default.export(ObjectExprFactory(
   ruleType: .object))
 ```
 
-Use your custom define object expression in any stylesheet rule
+Use your custom define object expression in any stylesheet rule.
 
 ```yaml
 
