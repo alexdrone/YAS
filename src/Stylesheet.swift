@@ -3,6 +3,11 @@ import Foundation
 import UIKit
 #endif
 
+extension Notification.Name {
+  /// Posted whenever the stylesheet has been reloaded.
+  static let YAMLStylesheetDidChange = Notification.Name("io.yas.YAMLStylesheetDidChange")
+}
+
 public enum ParseError: Error {
   /// The filename is not set.
   case fileNotSet
@@ -37,6 +42,7 @@ public final class StylesheetManager {
   public func load(file: String, bundle: Bundle = Bundle.main) throws {
     self.file = file
     try load(yaml: resolve(file: file, bundle: bundle))
+    NotificationCenter.default.post(name: Notification.Name.YAMLStylesheetDidChange, object: nil)
   }
 
   /// Reloads the yaml stylesheet.

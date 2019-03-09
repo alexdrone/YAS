@@ -151,6 +151,10 @@ MyStyle:
   myCustomRule: {type: myObject, foo: 42, bar: "Hello"}
 ```
 
+### Reacting to stylesheet changes
+
+`Notification.Name.YAMLStylesheetDidChange` is posted whenever the stylesheet has been reloaded.
+
 ### Dependencies and credits
 
 Deps forked from:
