@@ -125,7 +125,7 @@ Test:
   fontWeight: {type: font, weight: bold, size: 12}
   animator1: {type: animator, curve: easeIn, duration: 1}
   fontName: &_fontName Arial
-  attributedString: {type: attributedString, name: *_fontName, size: 42, kern: 2, color: ff0000}
+  attributedString: {type: attributedString, name: *_fontName, size: 42, kern: 2, hex: ff0000}
 Foo: &_Foo
   foo:  1
 Bar:

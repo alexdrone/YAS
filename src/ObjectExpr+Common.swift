@@ -87,10 +87,10 @@ struct ObjectExprCommon {
     @objc dynamic var kern: CGFloat = 1
     @objc dynamic var weight: String = "regular"
     @objc dynamic var supportDynamicType: Bool = true
-    @objc dynamic var color: String = "000"
+    @objc dynamic var hex: String = "000"
 
     override func eval() -> Any? {
-      let uiColor = UIColor(hex: color) ?? UIColor.black
+      let uiColor = UIColor(hex: hex) ?? UIColor.black
       var font = UIFont.systemFont(ofSize: size)
       if let fontName = name {
         font = UIFont(name: fontName, size: size)!
