@@ -24,7 +24,6 @@ targets:
 ```
 
 If you are using **Carthage**:
-
 Add the following line to your `Cartfile`:
 
 ```ruby
@@ -113,14 +112,15 @@ import: [typography.yaml, palette.yaml, buttons.yaml]
 
 ```
 
-
 ### Custom types
 
 You can define your own custom object expressions by creating a new `ObjectExpr`
 subclass.
 
 ```swift
-@objc class MyCustomObjectExpression : NSObject, ObectExpr { // NOTE: Your subclass must inherit from NSObject too.
+
+// NOTE: Your subclass must extend NSObject.
+@objc class MyCustomObjectExpression : NSObject, ObectExpr {
   // Your arguments must be marked with @obj and dynamic.
   @objc dynamic var foo: Int = 0
   @objc dynamic var bar: String = ""
