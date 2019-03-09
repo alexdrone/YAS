@@ -7,6 +7,14 @@ public protocol ObjectExpr: NSObjectProtocol {
   func eval() -> Any?
 }
 
+@objc open class ObjectExprBase: NSObject, ObjectExpr {
+  public required override init() {}
+
+  public func eval() -> Any? {
+    return nil
+  }
+}
+
 public protocol ObjectExprFactoryProtocol {
   /// The object name.
   var name: String { get }

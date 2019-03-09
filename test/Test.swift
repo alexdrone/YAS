@@ -57,6 +57,14 @@ class StylesheetTests: XCTestCase {
     XCTAssert(value!.pointSize == 12.0)
   }
 
+  func testAttributedString() {
+    let value = parser.rule(style: test, name: "attributedString")?.attributedString
+    XCTAssert(value!.font.pointSize == 42)
+    XCTAssert(value!.font.fontName == "ArialMT")
+    XCTAssert(value!.color.cgColor.components![0] == 1)
+    XCTAssert(value!.color.cgColor.components![1] == 0)
+  }
+
   func testEnum() {
     XCTAssert(parser.rule(style: test, name: "enum")?.enum(NSTextAlignment.self) == .right)
   }
@@ -116,6 +124,8 @@ Test:
   font: {type: font, name: Arial, size: 42}
   fontWeight: {type: font, weight: bold, size: 12}
   animator1: {type: animator, curve: easeIn, duration: 1}
+  fontName: &_fontName Arial
+  attributedString: {type: attributedString, name: *_fontName, size: 42, kern: 2, color: ff0000}
 Foo: &_Foo
   foo:  1
 Bar:

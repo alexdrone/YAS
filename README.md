@@ -119,15 +119,12 @@ subclass.
 
 ```swift
 
-// NOTE: Your subclass must extend NSObject.
-@objc class MyCustomObjectExpression : NSObject, ObectExpr {
+@objc class MyCustomObjectExpression : ObjectExprBase {
   // Your arguments must be marked with @obj and dynamic.
   @objc dynamic var foo: Int = 0
   @objc dynamic var bar: String = ""
 
-  required override init() {}
-
-  func eval() -> Any? {
+  override func eval() -> Any? {
     // Build your desired return types
     return MyCustomObject(foo: foo, bar: bar)
   }

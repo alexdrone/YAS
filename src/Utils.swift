@@ -60,7 +60,7 @@ public extension UIColor {
 }
 
 /// Fonts and its attributes.
-public struct FontBuilder {
+public class NSAttributedStringBuilder: NSObject {
   /// The typeface.
   private let internalFont: UIFont
   /// The font letter spacing.
@@ -82,8 +82,8 @@ public struct FontBuilder {
   }
 
   public init(
-    font: UIFont,
-    kern: CGFloat,
+    font: UIFont = UIFont.systemFont(ofSize: 10),
+    kern: CGFloat = 1,
     supportDynamicType: Bool = false,
     color: UIColor = .black
   ) {
@@ -102,8 +102,8 @@ public struct FontBuilder {
     ]
   }
   /// Override the `NSForegroundColorAttributeName` attribute.
-  public func withColor(_ override: UIColor) -> FontBuilder {
-    return FontBuilder(
+  public func withColor(_ override: UIColor) -> NSAttributedStringBuilder {
+    return NSAttributedStringBuilder(
       font: internalFont,
       kern: kern,
       supportDynamicType: supportDynamicType,

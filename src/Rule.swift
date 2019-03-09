@@ -15,6 +15,7 @@ public class Rule: CustomStringConvertible {
     case color
     case animator
     case object
+    case attributedString
     case undefined
   }
 
@@ -67,9 +68,14 @@ public class Rule: CustomStringConvertible {
     return castType(type: .color, default: UIColor.init())
   }
 
-  /// Retruns this rule as a `UIViewPropertyAnimator`.
+  /// Returns this rule as a `UIViewPropertyAnimator`.
   public var animator: UIViewPropertyAnimator {
     return castType(type: .animator, default: UIViewPropertyAnimator())
+  }
+
+  /// Returns this rule evaluated as a `NSAttributedStringBuilder`.
+  public var attributedString: NSAttributedStringBuilder {
+    return castType(type: .attributedString, default: NSAttributedStringBuilder())
   }
   #endif
 
@@ -90,6 +96,8 @@ public class Rule: CustomStringConvertible {
       return color
     case .animator:
       return animator
+    case .attributedString:
+      return attributedString
     #endif
     default:
       return nil
