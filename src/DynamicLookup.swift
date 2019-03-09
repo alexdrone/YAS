@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Yas {
+public struct YAMLStylesheet {
   /// Shorthand for the shared manager.
   static let manager = StylesheetManager.default
   /// Shorthand for the Dynamic lookup proxy.

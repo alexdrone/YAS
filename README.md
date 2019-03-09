@@ -2,7 +2,7 @@
 
 <img src="docs/logo.png" width=150 alt="Logo" align=right />
 
-**YAS** is YAML-based stylesheet engine written in Swift.
+**YAS** is a YAML-based stylesheet engine written in Swift.
 
 ### Installing the framework
 
@@ -13,7 +13,7 @@ curl "https://raw.githubusercontent.com/alexdrone/YAS/master/bin/dist.zip" > dis
 
 Drag `YAS.framework` in your project and add it as an embedded binary.
 
-If you use [xcodegen](https://github.com/yonaskolb/XcodeGen) add the framework to your *project.yml* like so:
+If you are using [xcodegen](https://github.com/yonaskolb/XcodeGen) add the framework to your *project.yml* like so:
 
 ```yaml
 targets:
@@ -23,9 +23,17 @@ targets:
       - framework: PATH/TO/YOUR/DEPS/YAS.framework
 ```
 
+If you are using **Carthage**:
+
+Add the following line to your `Cartfile`:
+
+```ruby
+github "alexdrone/YAS" "master"    
+```
+
 ### Getting Started
 
-Let's create a very basic YAML stylesheet and save it in a file named `style.yaml`.
+Create a new YAML stylesheet and save it in a file named `style.yaml`.
 
 ```yaml
 FooStyle:
@@ -33,21 +41,21 @@ FooStyle:
   margin: 10.0
 ```
 
-Load it up and use it in your Swift code:
+Load it up and access to its member using the built-in dynamic lookup proxy.
 
 ```swift
-try! Yas.manager.load("style.yaml")
-let margin = Yas.lookup.FooStyle.margin //10.0
-let backgroundColor = Yas.lookup.FooStyle.backgroundColor //UIColor(...)
+try! YAMLStylesheet.manager.load("style.yaml")
+let margin = YAMLStylesheet.lookup.FooStyle.margin.cgFloat //10.0
+let backgroundColor = YAMLStylesheet.lookup.FooStyle.backgroundColor.color //UIColor(...)
 ```
 
-Apply a style to a `UIView`:
+or automatically apply the style to your `UIView`:
 
 ```swift
 view.apply(style: Yas.lookup.FooStyle)
 ```
 
-### Primitives
+### Built-in types
 
 ```yaml
 Example:
@@ -93,6 +101,54 @@ Foo: &_Foo
 Bar
   <<: *_Foo
   yetAnotherValue: 2
+```
+
+### Cascade imports
+
+Stylesheets can be split into smaller modules by using the `import` rule at the top of the main stylesheet file.
+
+```yaml
+
+import: [typography.yaml, palette.yaml, buttons.yaml]
+
+```
+
+
+### Custom types
+
+You can define your own custom object expressions by creating a new `ObjectExpr`
+subclass.
+
+```swift
+@objc class MyCustomObjectExpression : NSObject, ObectExpr { // NOTE: Your subclass must inherit from NSObject too.
+  // Your arguments must be marked with @obj and dynamic.
+  @objc dynamic var foo: Int = 0
+  @objc dynamic var bar: String = ""
+
+  required override init() {}
+
+  func eval() -> Any? {
+    // Build your desired return types
+    return MyCustomObject(foo: foo, bar: bar)
+  }
+}
+```
+
+Finally register your `ObjectExpr`
+
+```swift
+ObjectExprRegistry.default.export(ObjectExprFactory(
+  type: MyCustomObjectExpression.self,
+  name: "myObject",
+  ruleType: .object))
+```
+
+Use your custom define object expression in any stylesheet rule
+
+```yaml
+
+MyStyle:
+  myCustomRule: {type: myObject, foo: 42, bar: "Hello"}
 ```
 
 # Credits:

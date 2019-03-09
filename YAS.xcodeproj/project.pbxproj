@@ -17,10 +17,10 @@
 		BF_15A4BDC4897B40327ED51B4557411078 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */; };
 		BF_1C5E5C64D385AB86B0E90312B9C5D075 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */; };
 		BF_2D6C3ED5D758691F04FFF47E5EB8D666 /* YASObjcExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */; };
-		BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YamlBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */; };
+		BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YAMLBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YAMLBridge.swift */; };
 		BF_3A5F48FBBF75BCCD6428CDF34B5FD82F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */; };
 		BF_3C165767B4CFCF92F77F05E9F9D94C78 /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF_3EC05748C794D6269439C3B1AB89CF38 /* YamlBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */; };
+		BF_3EC05748C794D6269439C3B1AB89CF38 /* YAMLBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YAMLBridge.swift */; };
 		BF_40804E18C44073A87E55D437FCBA7EFF /* ConstExpr+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = FR_2E461868D3E36DEBCA1A75B3E4B47D99 /* ConstExpr+Common.swift */; };
 		BF_4BBC5DBBCB9216A63C832840F99B1380 /* yaml.c in Sources */ = {isa = PBXBuildFile; fileRef = FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */; };
 		BF_4E05C00C4E35560251F225E79AB5089E /* YAS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FR_ECA16954F8783ADEBC1E9BB786256BF8 /* YAS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,7 +87,7 @@
 		FR_942390E0F1D5EB11D09D541B31E9C8F8 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YASObjcExceptionHandler.h; sourceTree = "<group>"; };
 		FR_A5CB0BEDC02F732BAB5A2707FF1A01BD /* YAS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YAS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YamlBridge.swift; sourceTree = "<group>"; };
+		FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YAMLBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLBridge.swift; sourceTree = "<group>"; };
 		FR_D5BCA78100C503C43041FECE74A50794 /* Test.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FR_DAE8550EF84CAE0D35F08693FD799E2A /* Stylesheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stylesheet.swift; sourceTree = "<group>"; };
 		FR_E3D880A2B16E1EA83632480A2566B1B4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */,
 				FR_8F6A848A4D6DA0B5A5083361DD7BF3FA /* yaml.c */,
 				FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */,
-				FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YamlBridge.swift */,
+				FR_A7AD0C7775A1FBA5223FE9DF627AA9EB /* YAMLBridge.swift */,
 				FR_9778154D7A79BB7CBB5CA90A1982F0DE /* YASObjcExceptionHandler.h */,
 				FR_4043FC7D0D3138C61850612D8692873B /* YASObjcExceptionHandler.m */,
 			);
@@ -331,7 +331,7 @@
 				BF_7045A0CCAAF5F7B918891A631F08B185 /* View.swift in Sources */,
 				16DDE9FF2226E5FD00DC945E /* ObjectExpr+Common.swift in Sources */,
 				BF_2D6C3ED5D758691F04FFF47E5EB8D666 /* YASObjcExceptionHandler.m in Sources */,
-				BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YamlBridge.swift in Sources */,
+				BF_2F99DBE3DFB39FE7ECAAC87C7B0FE57B /* YAMLBridge.swift in Sources */,
 				BF_A2C3D345D3E3EB1337083623F96CABE7 /* yaml.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +352,7 @@
 				BF_3A5F48FBBF75BCCD6428CDF34B5FD82F /* View.swift in Sources */,
 				16DDE9FE2226E5FC00DC945E /* ObjectExpr+Common.swift in Sources */,
 				BF_A8F5F810A3C24FF63DBB05D204516623 /* YASObjcExceptionHandler.m in Sources */,
-				BF_3EC05748C794D6269439C3B1AB89CF38 /* YamlBridge.swift in Sources */,
+				BF_3EC05748C794D6269439C3B1AB89CF38 /* YAMLBridge.swift in Sources */,
 				BF_4BBC5DBBCB9216A63C832840F99B1380 /* yaml.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
