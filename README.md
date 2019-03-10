@@ -78,7 +78,7 @@ Example:
   # {_type: animator, duration: 1, (curve: [easeIn...]), (damping: [0-1])}
   animator: {_type: animator, curve: easeIn, duration: 1}
   # {_type: text,  (name: [fontname]), size: [size], (weight: [light...]), (kern: [0..n]), (hex: [hex colorcode]), (supportDynamicType: [bool])}
-  attributedString: {_type: text, name: Arial, size: 42, kern: 2, hex: ff0000}
+  textStyle: {_type: text, name: Arial, size: 42, kern: 2, hex: ff0000}
 ```
 
 ### References and anchors
