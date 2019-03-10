@@ -81,7 +81,7 @@ struct ObjectExprCommon {
     }
   }
 
-  class AttributedString: ObjectExprBase {
+  class Text: ObjectExprBase {
     @objc dynamic var name: String? = nil
     @objc dynamic var size: CGFloat = 10
     @objc dynamic var kern: CGFloat = 1
@@ -99,7 +99,7 @@ struct ObjectExprCommon {
         let fontWeight = UIFont.Weight(rawValue: weights[weight] ?? 0)
         font = UIFont.systemFont(ofSize: size, weight: fontWeight)
       }
-      return NSAttributedStringBuilder(
+      return TextStyle(
         font: font,
         kern: kern,
         supportDynamicType: supportDynamicType,
@@ -124,8 +124,8 @@ func objectExprRegisterDefaults(_ registry: ObjectExprRegistry) {
     name: "animator",
     ruleType: .animator))
   registry.export(ObjectExprFactory(
-    type: ObjectExprCommon.AttributedString.self,
-    name: "attributedString",
-    ruleType: .attributedString))
+    type: ObjectExprCommon.Text.self,
+    name: "text",
+    ruleType: .textStyle))
   #endif
 }

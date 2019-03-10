@@ -28,7 +28,7 @@ public final class ObjectExprRegistry {
   /// Reserved keywords.
   private struct Reserved {
     /// The type keyword used to discern the object type.
-    static let type = "type"
+    static let type = "_type"
   }
 
   /// Singleton instance.
@@ -70,7 +70,6 @@ public final class ObjectExprRegistry {
     }
     let object = factory.build()
     let nsObject = object as? NSObject
-
 
     for (k, v) in yaml.mapping! {
       guard v.isScalar, let key = k.string, key != Reserved.type else {

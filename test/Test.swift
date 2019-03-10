@@ -58,7 +58,7 @@ class StylesheetTests: XCTestCase {
   }
 
   func testAttributedString() {
-    let value = parser.rule(style: test, name: "attributedString")?.attributedString
+    let value = parser.rule(style: test, name: "textStyle")?.textStyle
     XCTAssert(value!.font.pointSize == 42)
     XCTAssert(value!.font.fontName == "ArialMT")
     XCTAssert(value!.color.cgColor.components![0] == 1)
@@ -120,12 +120,12 @@ Test:
   boolExpr: ${1 == 1 && true}
   integerExpr: ${41+1}
   const: ${iPhoneSE.width}
-  color: {type: color, hex: ff0000}
-  font: {type: font, name: Arial, size: 42}
-  fontWeight: {type: font, weight: bold, size: 12}
-  animator1: {type: animator, curve: easeIn, duration: 1}
+  color: {_type: color, hex: ff0000}
+  font: {_type: font, name: Arial, size: 42}
+  fontWeight: {_type: font, weight: bold, size: 12}
+  animator1: {_type: animator, curve: easeIn, duration: 1}
   fontName: &_fontName Arial
-  attributedString: {type: attributedString, name: *_fontName, size: 42, kern: 2, hex: ff0000}
+  textStyle: {_type: text, name: *_fontName, size: 42, kern: 2, hex: ff0000}
 Foo: &_Foo
   foo:  1
 Bar:
@@ -141,7 +141,7 @@ Foo:
 """
 let viewDefs = """
 View:
-  backgroundColor: {type: color, hex: ff0000}
+  backgroundColor: {_type: color, hex: ff0000}
   layer.borderWidth: 1
   flexDirection: ${row}
   margin: 10

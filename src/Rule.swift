@@ -15,7 +15,7 @@ public class Rule: CustomStringConvertible {
     case color
     case animator
     case object
-    case attributedString
+    case textStyle
     case undefined
   }
 
@@ -74,8 +74,8 @@ public class Rule: CustomStringConvertible {
   }
 
   /// Returns this rule evaluated as a `NSAttributedStringBuilder`.
-  public var attributedString: NSAttributedStringBuilder {
-    return castType(type: .attributedString, default: NSAttributedStringBuilder())
+  public var textStyle: TextStyle {
+    return castType(type: .textStyle, default: TextStyle())
   }
   #endif
 
@@ -96,8 +96,8 @@ public class Rule: CustomStringConvertible {
       return color
     case .animator:
       return animator
-    case .attributedString:
-      return attributedString
+    case .textStyle:
+      return textStyle
     #endif
     default:
       return nil
