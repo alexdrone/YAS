@@ -36,7 +36,7 @@ Create a new YAML stylesheet and save it in a file named `style.yaml`.
 
 ```yaml
 FooStyle:
-  backgroundColor: {type: color, hex: ff0000}
+  backgroundColor: {_type: color, hex: ff0000}
   margin: 10.0
 ```
 
@@ -68,16 +68,17 @@ Example:
   boolExpression: ${1 == 1 && true}
   integerExpression: ${41+1}
   # Custom objects.
+  # Use the reserved _type attribute to distinguish the object type. 
   # New object types can be exported by calling ObjectExpr.export(...)
-  # {type: color, hex: ffffff, (darken: [0-100]), (lighten: [0-100]), (alpha: [0-1])}
-  color: {type: color, hex: ff0000}
-  # {type: font, (name: [fontname]), size: [size], (weight: [light...])}
-  font:  {type: font, name: Arial, size: 42}
-  fontWeight: {type: font, weight: bold, size: 12}
-  # {type: animator, duration: 1, (curve: [easeIn...]), (damping: [0-1])}
-  animator: {type: animator, curve: easeIn, duration: 1}
-  # {type: attributedString,  (name: [fontname]), size: [size], (weight: [light...]), (kern: [0..n]), (hex: [hex colorcode]), (supportDynamicType: [bool])}
-  attributedString: {type: attributedString, name: Arial, size: 42, kern: 2, hex: ff0000}
+  # {_type: color, hex: ffffff, (darken: [0-100]), (lighten: [0-100]), (alpha: [0-1])}
+  color: {_type: color, hex: ff0000}
+  # {_type: font, (name: [fontname]), size: [size], (weight: [light...])}
+  font:  {_type: font, name: Arial, size: 42}
+  fontWeight: {_type: font, weight: bold, size: 12}
+  # {_type: animator, duration: 1, (curve: [easeIn...]), (damping: [0-1])}
+  animator: {_type: animator, curve: easeIn, duration: 1}
+  # {_type: text,  (name: [fontname]), size: [size], (weight: [light...]), (kern: [0..n]), (hex: [hex colorcode]), (supportDynamicType: [bool])}
+  attributedString: {_type: text, name: Arial, size: 42, kern: 2, hex: ff0000}
 ```
 
 ### References and anchors
@@ -98,7 +99,7 @@ You can also copy the whole style using the YAML extension construct:
 Foo: &_Foo
   aValue: 42.0
   anotherValue: "Hello"
-  someColor: {type: color, hex: ff0000}
+  someColor: {_type: color, hex: ff0000}
 Bar:
   <<: *_Foo
   yetAnotherValue: 2
@@ -110,13 +111,13 @@ Bar:
 Palette:
   primaryColorHex: &_primaryColorHex ff0000
   primaryColor: &_primaryColor {type: color, hex: *_primaryColorHex}
-  primaryColor600: &_primaryColor600 {type: color, hex: *_primaryColorHex, darken: 10}
-  primaryColor700: &_primaryColor700 {type: color, hex: *_primaryColorHex, darken: 20}
+  primaryColor600: &_primaryColor600 {_type: color, hex: *_primaryColorHex, darken: 10}
+  primaryColor700: &_primaryColor700 {_type: color, hex: *_primaryColorHex, darken: 20}
 Typography:
   primaryFontName: &_primaryFontName "Open Sans"
   secondaryFontName: &_secondaryFontName "Rubik"
-  body1: &_body1 {type: attributedString, name: *_secondaryFontName, size: 14.26, kern: 0.25, color: *_primaryColorHex}
-  body2: &_body2 {type: attributedString, weight: medium, size: 12.22, kern: 0.5, color: *_primaryColorHex}
+  body1: &_body1 {_type: attributedString, name: *_secondaryFontName, size: 14.26, kern: 0.25, color: *_primaryColorHex}
+  body2: &_body2 {_type: attributedString, weight: medium, size: 12.22, kern: 0.5, color: *_primaryColorHex}
 LandingPage:
   titleText: *_body1
   backgroundColor: *_primaryColor600
@@ -169,7 +170,7 @@ Use your custom define object expression in any stylesheet rule.
 ```yaml
 
 MyStyle:
-  myCustomRule: {type: myObject, foo: 42, bar: "Hello"}
+  myCustomRule: {_type: myObject, foo: 42, bar: "Hello"}
 ```
 
 ### Reacting to stylesheet changes
