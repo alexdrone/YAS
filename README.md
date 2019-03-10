@@ -68,7 +68,7 @@ Example:
   boolExpression: ${1 == 1 && true}
   integerExpression: ${41+1}
   # Custom objects.
-  # Use the reserved _type attribute to distinguish the object type. 
+  # Use the reserved _type attribute to distinguish the object type.
   # New object types can be exported by calling ObjectExpr.export(...)
   # {_type: color, hex: ffffff, (darken: [0-100]), (lighten: [0-100]), (alpha: [0-1])}
   color: {_type: color, hex: ff0000}
@@ -110,7 +110,7 @@ Bar:
 ```yaml
 Palette:
   primaryColorHex: &_primaryColorHex ff0000
-  primaryColor: &_primaryColor {type: color, hex: *_primaryColorHex}
+  primaryColor: &_primaryColor {_type: color, hex: *_primaryColorHex}
   primaryColor600: &_primaryColor600 {_type: color, hex: *_primaryColorHex, darken: 10}
   primaryColor700: &_primaryColor700 {_type: color, hex: *_primaryColorHex, darken: 20}
 Typography:
