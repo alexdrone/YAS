@@ -1,12 +1,5 @@
 import Foundation
 
-public struct YAMLStylesheet {
-  /// Shorthand for the shared manager.
-  static let manager = StylesheetManager.default
-  /// Shorthand for the Dynamic lookup proxy.
-  static let lookup = StyleDynamicLookup()
-}
-
 @dynamicMemberLookup
 public struct RuleDynamicLookup {
   /// The style name.

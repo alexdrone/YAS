@@ -43,9 +43,9 @@ FooStyle:
 Load it up and access to its member using the built-in dynamic lookup proxy.
 
 ```swift
-try! YAMLStylesheet.manager.load("style.yaml")
-let margin = YAMLStylesheet.lookup.FooStyle.margin.cgFloat //10.0
-let backgroundColor = YAMLStylesheet.lookup.FooStyle.backgroundColor.color //UIColor(...)
+try! StylesheetContext.manager.load("style.yaml")
+let margin = StylesheetContext.lookup.FooStyle.margin.cgFloat //10.0
+let backgroundColor = StylesheetContext.lookup.FooStyle.backgroundColor.color //UIColor(...)
 ```
 
 or automatically apply the style to your `UIView`:
@@ -159,10 +159,9 @@ subclass.
 Finally register your `ObjectExpr` in the shared `ObjectExprRegistry`.
 
 ```swift
-ObjectExprRegistry.default.export(ObjectExprFactory(
+StylesheetContext.objectExpr.export(ObjectExprFactory(
   type: MyCustomObjectExpression.self,
-  name: "myObject",
-  ruleType: .object))
+  name: "myObject")
 ```
 
 Use your custom define object expression in any stylesheet rule.
@@ -175,7 +174,7 @@ MyStyle:
 
 ### Reacting to stylesheet changes
 
-`Notification.Name.YAMLStylesheetDidChange` is posted whenever the stylesheet has been reloaded.
+`Notification.Name.StylesheetContextDidChange` is posted whenever the stylesheet has been reloaded.
 
 ### Dependencies and credits
 

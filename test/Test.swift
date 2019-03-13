@@ -70,9 +70,9 @@ class StylesheetTests: XCTestCase {
   }
 
   func testApplyStyleseetToView() {
-    try! YAMLStylesheet.manager.load(yaml: viewDefs)
+    try! StylesheetContext.manager.load(yaml: viewDefs)
     let view = UIView()
-    view.apply(style: YAMLStylesheet.manager.defs["View"])
+    view.apply(style: StylesheetContext.manager.defs["View"])
     let value = view.backgroundColor
     XCTAssert(value!.cgColor.components![0] == 1)
     XCTAssert(value!.cgColor.components![1] == 0)
@@ -96,16 +96,16 @@ class StylesheetTests: XCTestCase {
   }
 
   func testStyleDynamicLookup() {
-    try! YAMLStylesheet.manager.load(yaml: viewDefs)
+    try! StylesheetContext.manager.load(yaml: viewDefs)
     let view = UIView()
-    view.apply(style: YAMLStylesheet.lookup.View.style)
+    view.apply(style: StylesheetContext.lookup.View.style)
     XCTAssert(view.layer.borderWidth == 1)
   }
 
   func testRuleDynamicLookup() {
-    try! YAMLStylesheet.manager.load(yaml: viewDefs)
-    XCTAssert(YAMLStylesheet.lookup.View.margin.cgFloat == 10.0)
-    XCTAssert(YAMLStylesheet.lookup.View.someText.string == "Aaa")
+    try! StylesheetContext.manager.load(yaml: viewDefs)
+    XCTAssert(StylesheetContext.lookup.View.margin.cgFloat == 10.0)
+    XCTAssert(StylesheetContext.lookup.View.someText.string == "Aaa")
   }
 }
 

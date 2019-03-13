@@ -3,11 +3,6 @@ import Foundation
 import UIKit
 #endif
 
-extension Notification.Name {
-  /// Posted whenever the stylesheet has been reloaded.
-  static let YAMLStylesheetDidChange = Notification.Name("io.yas.YAMLStylesheetDidChange")
-}
-
 public enum ParseError: Error {
   /// The filename is not set.
   case fileNotSet
@@ -26,6 +21,15 @@ public final class StylesheetManager {
   private var bundle: Bundle?
   /// The parsed *Yaml* document.
   public var defs: [String: [String: Rule]] = [:]
+  #if canImport(UIKit)
+  /// Available animators.
+  public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
+
+  /// Returns the rule named 'name' of a specified style.
+  public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
+    return animators[style]?[name]
+  }
+  #endif
 
   init() {
     // Internal constructor.
@@ -42,7 +46,7 @@ public final class StylesheetManager {
   public func load(file: String, bundle: Bundle = Bundle.main) throws {
     self.file = file
     try load(yaml: resolve(file: file, bundle: bundle))
-    NotificationCenter.default.post(name: Notification.Name.YAMLStylesheetDidChange, object: nil)
+    NotificationCenter.default.post(name: Notification.Name.StylesheetContextDidChange, object: nil)
   }
 
   /// Reloads the yaml stylesheet.
@@ -155,16 +159,4 @@ public final class StylesheetManager {
     let timeElapsed = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
     print(String(format: "\(label) (%2f) ms.", arguments: [timeElapsed]))
   }
-
-  // MARK: UIKit
-
-  #if canImport(UIKit)
-  /// Available animators.
-  public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
-
-  /// Returns the rule named 'name' of a specified style.
-  public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
-    return animators[style]?[name]
-  }
-  #endif
 }
