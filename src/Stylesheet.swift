@@ -159,8 +159,6 @@ public final class StylesheetManager {
   // MARK: UIKit
 
   #if canImport(UIKit)
-  /// The parent container size for the current context.
-  public private(set) var parentSize: CGSize = .zero
   /// Available animators.
   public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
 

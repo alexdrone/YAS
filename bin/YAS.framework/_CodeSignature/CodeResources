@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/YAS-Swift.h</key>
 		<data>
-		n+OIB75Its8HSBEK2Ai59S2lMCs=
+		0MrQET7cCWeQtvfzxf0/bWDKVAw=
 		</data>
 		<key>Headers/YAS.h</key>
 		<data>
@@ -22,23 +22,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		63FZ5J/VMQtTJ/JCsfZm8H8DZpQ=
+		hOjPjTQcUyjGLLJ8h9F4adeufE8=
 		</data>
 		<key>Modules/YAS.swiftmodule/i386.swiftdoc</key>
 		<data>
-		HujsjKSoaf3LfGvXFAp4jgF0A/E=
+		zW1YuLRCAVww/ITto0zeparAfoU=
 		</data>
 		<key>Modules/YAS.swiftmodule/i386.swiftmodule</key>
 		<data>
-		Wr4AjjvNCN5y3U0uHO22u436G/E=
+		zK41iXAs7jxI2pVwgPNi0fOfiGs=
 		</data>
 		<key>Modules/YAS.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		ItdATUtBwiTzWtZC9T1VeyNdoOw=
+		J3ZD5nTJXw00m2w1juobpKkYNmY=
 		</data>
 		<key>Modules/YAS.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		MMHyytojA0BvmGo6nnkFOQ3E/mk=
+		zOtTb38k0TPP1COW1f97XxQNy/A=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -51,11 +51,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			n+OIB75Its8HSBEK2Ai59S2lMCs=
+			0MrQET7cCWeQtvfzxf0/bWDKVAw=
 			</data>
 			<key>hash2</key>
 			<data>
-			wrSdjbg9M7B9ll6L5/JQ/Y5XCdTuY4AjT6dg4m4DtGQ=
+			Y+FCaDsR8+zFFHV/vjvQXkWE9lL8wCSATDpNZION5GY=
 			</data>
 		</dict>
 		<key>Headers/YAS.h</key>
@@ -95,44 +95,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HujsjKSoaf3LfGvXFAp4jgF0A/E=
+			zW1YuLRCAVww/ITto0zeparAfoU=
 			</data>
 			<key>hash2</key>
 			<data>
-			eozZGkGEjUvo2b2FdOXe7F0FRNVBTZg2/+MOMj4blRQ=
+			cDPoITHwgB96mEta088UOoXL+zJ1DiEJ6Tp+zRxqMwY=
 			</data>
 		</dict>
 		<key>Modules/YAS.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Wr4AjjvNCN5y3U0uHO22u436G/E=
+			zK41iXAs7jxI2pVwgPNi0fOfiGs=
 			</data>
 			<key>hash2</key>
 			<data>
-			PMRapmw6NulScjEyKTtICHFTPlHKNTfTsADqiHApxng=
+			3VVZx+iZiPX2G0VDZaEzNXRkrb7pdu2DYHpIZEz+6Ss=
 			</data>
 		</dict>
 		<key>Modules/YAS.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ItdATUtBwiTzWtZC9T1VeyNdoOw=
+			J3ZD5nTJXw00m2w1juobpKkYNmY=
 			</data>
 			<key>hash2</key>
 			<data>
-			9+VTiBvP9G5peZSCFDeOIuT+Oifam2QIjquon8StDH0=
+			I266teNfeQJcylwJPm2WMh/gAkrY6EmMD5Cs450JCE0=
 			</data>
 		</dict>
 		<key>Modules/YAS.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MMHyytojA0BvmGo6nnkFOQ3E/mk=
+			zOtTb38k0TPP1COW1f97XxQNy/A=
 			</data>
 			<key>hash2</key>
 			<data>
-			Uokb5bIbxyWCtzgdX2mvxbz8G16rtG7V4boB/R4+f4w=
+			ZjHfkl8YhyCtaALCVxEMiD8mOV1AWw+B72GlNDsg63Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

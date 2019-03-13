@@ -1,7 +1,4 @@
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#endif
 
 /// Represents a rule for a style definition.
 public class Rule: CustomStringConvertible {
@@ -11,11 +8,7 @@ public class Rule: CustomStringConvertible {
     case bool
     case number
     case string
-    case font
-    case color
-    case animator
     case object
-    case textStyle
     case undefined
   }
 
@@ -47,37 +40,8 @@ public class Rule: CustomStringConvertible {
 
   /// Returns this rule evaluated as a string.
   public var string: String {
-    return castType(type: .string, default: String.init())
+    return cast(type: .string, default: String.init())
   }
-
-  #if canImport(UIKit)
-  /// Returns this rule evaluated as a float.
-  /// - note: The default value is 0.
-  public var cgFloat: CGFloat {
-    return (nsNumber as? CGFloat) ?? 0
-  }
-
-  /// Returns this rule evaluated as a `UIFont`.
-  public var font: UIFont {
-    return castType(type: .font, default: UIFont.init())
-  }
-
-  /// Returns this rule evaluated as a `UIColor`.
-  /// - note: The default value is `UIColor.black`.
-  public var color: UIColor {
-    return castType(type: .color, default: UIColor.init())
-  }
-
-  /// Returns this rule as a `UIViewPropertyAnimator`.
-  public var animator: UIViewPropertyAnimator {
-    return castType(type: .animator, default: UIViewPropertyAnimator())
-  }
-
-  /// Returns this rule evaluated as a `NSAttributedStringBuilder`.
-  public var textStyle: TextStyle {
-    return castType(type: .textStyle, default: TextStyle())
-  }
-  #endif
 
   /// Object representation for the `rhs` value of this rule.
   public var object: AnyObject? {
@@ -88,17 +52,7 @@ public class Rule: CustomStringConvertible {
     case .string:
       return (string as NSString)
     case .object:
-      return castType(type: .object, default: NSObject())
-    #if canImport(UIKit)
-    case .font:
-      return font
-    case .color:
-      return color
-    case .animator:
-      return animator
-    case .textStyle:
-      return textStyle
-    #endif
+      return cast(type: .object, default: nil)
     default:
       return nil
     }
@@ -113,7 +67,7 @@ public class Rule: CustomStringConvertible {
     return T.init(rawValue: integer) ?? `default`
   }
 
-  private func castType<T>(type: ValueType, default: T) -> T {
+  public func cast<T>(type: ValueType, default: T) -> T {
     /// There`s a type mismatch between the desired type and the type currently associated to this
     /// rule.
     guard self.type == type else {
@@ -133,7 +87,7 @@ public class Rule: CustomStringConvertible {
     let `default` = NSNumber(value: 0)
     // If the store is an expression, it must be evaluated first.
     if type == .expression {
-      let expression = castType(type: .expression, default: Rule.defaultExpression)
+      let expression = cast(type: .expression, default: Rule.defaultExpression)
       return NSNumber(value: evaluate(expression: expression))
     }
     // The store is `NSNumber` obj.
@@ -162,8 +116,7 @@ public class Rule: CustomStringConvertible {
   private func parseValue(for yaml: YAMLNode) throws -> (ValueType, Any?) {
     if yaml.isScalar {
       if let v = yaml.bool {
-        return(.bool, v)
-      }
+        return(.bool, v) }
       if let v = yaml.int {
         return(.number, v)
       }
