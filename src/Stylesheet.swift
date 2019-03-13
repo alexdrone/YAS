@@ -8,8 +8,10 @@ public enum ParseError: Error {
   case fileNotSet
   /// The file was not found in the bundle.
   case fileNotFound(file: String)
-  /// Illegal stylesheet format
+  /// Illegal stylesheet format.
   case malformedStylesheetStructure(message: String?)
+  /// Illegal stylesheet rule definition.
+  case malformedRule(message: String)
 }
 
 public final class StylesheetManager {
@@ -115,6 +117,7 @@ public final class StylesheetManager {
             defs[isk] = try Rule(key: isk, value: iv)
           }
         }
+
         #if canImport(UIKit)
         let animatorPrefix = "animator-"
         for (k, v) in defDic {
@@ -130,6 +133,7 @@ public final class StylesheetManager {
         }
         yamlAnimators[defKey] = animators
         #endif
+
         yamlDefs[defKey] = defs
       }
     }

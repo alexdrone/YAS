@@ -25,16 +25,14 @@ public protocol ObjectExprFactoryProtocol {
 }
 
 public final class ObjectExprRegistry {
-  /// Reserved keywords.
-  private struct Reserved {
-    /// The type keyword used to discern the object type.
-    static let type = "_type"
-  }
-
   /// Singleton instance.
   static let `default` = ObjectExprRegistry()
   /// The objects factories registered.
   private var factories: [ObjectExprFactoryProtocol] = []
+  /// All of the registered `_type` identifiers.
+  lazy var exportedObjectTypes: [String] = {
+    return factories.map { factory in factory.name }
+  }();
 
   private init() {
     objectExprRegisterDefaults(self)
@@ -55,7 +53,7 @@ public final class ObjectExprRegistry {
 
   private func factory(fromYaml yaml: YAMLNode) -> ObjectExprFactoryProtocol? {
     guard yaml.isMapping,
-      let type = yaml.mapping?[Reserved.type]?.string else {
+      let type = yaml.mapping?[Rule.Reserved.type]?.string else {
         return nil
     }
     guard let objectFactory = factories.filter({ $0.name == type }).first else {
@@ -72,7 +70,7 @@ public final class ObjectExprRegistry {
     let nsObject = object as? NSObject
 
     for (k, v) in yaml.mapping! {
-      guard v.isScalar, let key = k.string, key != Reserved.type else {
+      guard v.isScalar, let key = k.string, key != Rule.Reserved.type else {
         continue
       }
       YASObjcExceptionHandler.try({

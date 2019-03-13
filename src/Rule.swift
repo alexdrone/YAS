@@ -1,26 +1,53 @@
 import Foundation
 
-/// Represents a rule for a style definition.
+/// Represents a stylesheet rule (expressed in the form of [key]: ([value]|[object]).
 public class Rule: CustomStringConvertible {
-  /// Internal value type store.
+  /// Primitive type categories for the right-hand side of the expression.
   public enum ValueType: String {
+    /// Numerical expression (e.g. ${x > 0}).
     case expression
+    /// Boolean (`true`|`false`).
     case bool
+    /// Numerical value (See `integer`, `cgFloat` or `nsNumber` getters).
     case number
+    /// Yaml-parsed string value.
     case string
+    /// A custom Yaml mapping (Must have the `_type`:[String] mapping to discern its object type).
     case object
+    /// Undefined value (Used whenever a value is malformed).
     case undefined
   }
 
-  /// The key for this value.
-  var key: String
+  /// Reserved keywords.
+  struct Reserved {
+    /// The type keyword used to discern the object type.
+    static let type = "_type"
+  }
+
+  /// The rule identifier (the left-hand side expression).
+  private var key: String
   /// The value type.
-  var type: ValueType?
-  /// The computed value.
-  var store: Any?
+  private var type: ValueType?
+  /// The value store,
+  private var store: Any?
 
   /// Construct a rule from a Yaml subtree.
+  /// Fails if the right-hand side of the expression is a malformed value.
   init(key: String, value: YAMLNode) throws {
+    guard value.isScalar || value.isMapping else {
+      throw ParseError.malformedRule(
+        message: "Rhs of \(key) must be a scalar or a mapping.")
+    }
+    let registry = ObjectExprRegistry.default;
+    let optionalObjType = value.mapping?[Rule.Reserved.type]?.string;
+    guard !value.isMapping || optionalObjType != nil else {
+      throw ParseError.malformedRule(
+        message: "Rhs of \(key) is a mapping but is missing the \(Reserved.type) attribute.")
+    }
+    if let objType = optionalObjType, !registry.exportedObjectTypes.contains(objType) {
+      throw ParseError.malformedRule(
+        message: "\(objType) is an undefined \(Reserved.type).")
+    }
     self.key = key
     let (type, store) = try parseValue(for: value)
     (self.type, self.store) = (type, store)
@@ -39,11 +66,12 @@ public class Rule: CustomStringConvertible {
   }
 
   /// Returns this rule evaluated as a string.
+  /// - note: The default value is an empty string.
   public var string: String {
     return cast(type: .string, default: String.init())
   }
 
-  /// Object representation for the `rhs` value of this rule.
+  /// Opaque `rhs` value for this rule.
   public var object: AnyObject? {
     guard let type = type else { return NSObject() }
     switch type {
@@ -67,20 +95,6 @@ public class Rule: CustomStringConvertible {
     return T.init(rawValue: integer) ?? `default`
   }
 
-  public func cast<T>(type: ValueType, default: T) -> T {
-    /// There`s a type mismatch between the desired type and the type currently associated to this
-    /// rule.
-    guard self.type == type else {
-      warn("type mismatch – wanted \(type), found \(String(describing: self.type)).")
-      return `default`
-    }
-    /// Casts the store value as the desired type `T`.
-    if let value = self.store as? T {
-      return value
-    }
-    return `default`
-  }
-
   /// Main entry point for numeric return types and expressions.
   /// - note: If it fails evaluating this rule value, `NSNumber` 0.\
   public var nsNumber: NSNumber {
@@ -97,6 +111,28 @@ public class Rule: CustomStringConvertible {
     return `default`
   }
 
+  // Tentatively casts the rhs value to the desired type.
+  public func cast<T>(type: ValueType, default: T) -> T {
+    /// There`s a type mismatch between the desired type and the type currently associated to this
+    /// rule.
+    guard self.type == type else {
+      warn("type mismatch – wanted \(type), found \(String(describing: self.type)).")
+      return `default`
+    }
+    /// Casts the store value as the desired type `T`.
+    if let value = self.store as? T {
+      return value
+    }
+    return `default`
+  }
+
+  /// A textual representation of this instance.
+  public var description: String {
+    return type?.rawValue ?? "undefined"
+  }
+
+  // MARK: - Private
+
   /// Tentatively tries to evaluate an expression.
   /// - note: Returns 0 if the evaluation fails.
   private func evaluate(expression: Expression?) -> Double {
@@ -112,7 +148,6 @@ public class Rule: CustomStringConvertible {
     }
   }
 
-  /// Parse the `rhs` value of a rule.
   private func parseValue(for yaml: YAMLNode) throws -> (ValueType, Any?) {
     if yaml.isScalar {
       if let v = yaml.bool {
@@ -134,9 +169,9 @@ public class Rule: CustomStringConvertible {
     return (.undefined, nil)
   }
 
-  /// Parse a string value.
-  /// - `${expression}` to evaluate an expression.
-  /// - A string.
+  // Parse a string value.
+  // - `${expression}` to evaluate an expression.
+  // - A string.
   private func parse(string: String) throws -> (ValueType, Any?) {
     // - `${expression}` to evaluate an expression.
     if let exprString = ConstExpr.sanitize(expression: string) {
@@ -145,17 +180,12 @@ public class Rule: CustomStringConvertible {
     return (.string, string)
   }
 
-  /// Parse an object.
+  // Parse an object.
   private func parse(mapping: YAMLNode) throws -> (ValueType, Any?) {
     guard mapping.isMapping else {
       return (.undefined, nil)
     }
     return ObjectExprRegistry.default.eval(fromYaml:mapping)
-  }
-
-  /// A textual representation of this instance.
-  public var description: String {
-    return type?.rawValue ?? "undefined"
   }
 
   static private let defaultExpression = Expression("0")
