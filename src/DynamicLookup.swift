@@ -2,9 +2,9 @@ import Foundation
 
 @dynamicMemberLookup
 public struct RuleDynamicLookup {
-  /// The style name.
+  /// The style identifier.
   public let id: String
-  /// Returns the current style.
+  /// Returns the current style definitions.
   public var style: [String: Rule] {
     guard let style = StylesheetManager.default.defs[id] else {
       warn("Unable to find style \(id).")
@@ -13,7 +13,6 @@ public struct RuleDynamicLookup {
     return style
   }
 
-  /// Builds a dynamic lookup with the given style.
   init(id: String) {
     self.id = id
   }
@@ -29,6 +28,7 @@ public struct RuleDynamicLookup {
 
 @dynamicMemberLookup
 public struct StyleDynamicLookup  {
+  /// Returns a `RuleDynamicLookup` pointing at the style passed as argument.
   public subscript(dynamicMember member: String) -> RuleDynamicLookup {
     return RuleDynamicLookup(id: member)
   }

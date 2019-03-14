@@ -15,19 +15,23 @@ public enum ParseError: Error {
 }
 
 public final class StylesheetManager {
-  /// Singleton instance.
+  /// Shared manager instance.
   public static let `default` = StylesheetManager()
-  /// The stylesheet file currently loaded.
+  /// The parsed Yaml document (internal only).
+  var defs: [String: [String: Rule]] = [:]
+  /// The filename for of the Yaml stylesheet.
   private var file: String?
   /// The reource bundle where the stylesheet is located.
   private var bundle: Bundle?
-  /// The parsed *Yaml* document.
-  public var defs: [String: [String: Rule]] = [:]
   #if canImport(UIKit)
   /// Available animators.
   public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
 
-  /// Returns the rule named 'name' of a specified style.
+  /// Returns the animator for a given property.
+  /// Animators rule have the `animator-` prefix.
+  /// e.g.
+  /// layer.cornerRadius: 10
+  /// animator-layer.cornerRadius: {_type: animator, curve: easeIn, duration: 1}
   public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
     return animators[style]?[name]
   }
@@ -39,19 +43,19 @@ public final class StylesheetManager {
 
   // MARK: Public
 
-  /// Returns the rule named 'name' of a specified style.
+  /// Returns the rule named `name` of a specified style.
   public func rule(style: String, name: String) -> Rule? {
     return defs[style]?[name]
   }
 
-  /// Loads the yaml stylesheet.
+  /// Parse and load the Yaml stylesheet.
   public func load(file: String, bundle: Bundle = Bundle.main) throws {
     self.file = file
     try load(yaml: resolve(file: file, bundle: bundle))
     NotificationCenter.default.post(name: Notification.Name.StylesheetContextDidChange, object: nil)
   }
 
-  /// Reloads the yaml stylesheet.
+  /// Reloads the Yaml stylesheet.
   public func reload() throws {
     guard let file = file, let bundle = bundle else {
       throw ParseError.fileNotSet
@@ -149,7 +153,6 @@ public final class StylesheetManager {
 
   // MARK: Private
 
-  /// Reads the file from the app bundle.
   private func resolve(file: String, bundle: Bundle) throws -> String {
     guard
       let leaf = file.components(separatedBy: "/").last,

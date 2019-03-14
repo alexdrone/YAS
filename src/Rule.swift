@@ -133,8 +133,6 @@ public class Rule: CustomStringConvertible {
 
   // MARK: - Private
 
-  /// Tentatively tries to evaluate an expression.
-  /// - note: Returns 0 if the evaluation fails.
   private func evaluate(expression: Expression?) -> Double {
     guard let expression = expression else {
       warn("nil expression.")
@@ -169,9 +167,6 @@ public class Rule: CustomStringConvertible {
     return (.undefined, nil)
   }
 
-  // Parse a string value.
-  // - `${expression}` to evaluate an expression.
-  // - A string.
   private func parse(string: String) throws -> (ValueType, Any?) {
     // - `${expression}` to evaluate an expression.
     if let exprString = ConstExpr.sanitize(expression: string) {
@@ -180,7 +175,6 @@ public class Rule: CustomStringConvertible {
     return (.string, string)
   }
 
-  // Parse an object.
   private func parse(mapping: YAMLNode) throws -> (ValueType, Any?) {
     guard mapping.isMapping else {
       return (.undefined, nil)
