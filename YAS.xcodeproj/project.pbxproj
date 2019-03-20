@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1694729B22411C9D007E145A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694729A22411C9D007E145A /* Style.swift */; };
+		1694729C22411C9D007E145A /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1694729A22411C9D007E145A /* Style.swift */; };
 		16F6FF33223AEC6800B04339 /* ConstExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6FF31223AEC6000B04339 /* ConstExpr.swift */; };
 		16F6FF34223AEC6800B04339 /* ConstExpr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F6FF31223AEC6000B04339 /* ConstExpr.swift */; };
 		BF_02E792D69455A65D9BBBFC9E09817C56 /* yaml.h in Headers */ = {isa = PBXBuildFile; fileRef = FR_754DCAF3EBD439B2C5A5BCB03928D0A3 /* yaml.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1694729A22411C9D007E145A /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		16F6FF31223AEC6000B04339 /* ConstExpr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstExpr.swift; sourceTree = "<group>"; };
 		FR_06CCAECFAC095C7C7CD994E71BD3BA40 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		FR_2B1C7930485EEE720FFEA604BA618494 /* UIKit+ObjectExpr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+ObjectExpr.swift"; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 				FR_5F3A7219B9FA1D6C34C4E6B753242D65 /* Info.plist */,
 				FR_C0DE83247752CCEAF3B188030B6F5544 /* ObjectExpr.swift */,
 				FR_F2D8A64D4E1E66F538CE657EB3C94521 /* Rule.swift */,
+				1694729A22411C9D007E145A /* Style.swift */,
 				FR_DAE8550EF84CAE0D35F08693FD799E2A /* Stylesheet.swift */,
 				FR_8C2AA13B28BE0F8B3F11A29DC51037B3 /* StylesheetContext.swift */,
 				FR_86B7FA232D6FEDB05C7FB260ED362070 /* View.swift */,
@@ -331,6 +335,7 @@
 				BF_15A4BDC4897B40327ED51B4557411078 /* Expression.swift in Sources */,
 				BF_C5B26DE4831EBB55B0707A5E7DE3DDB0 /* UIKit+Helpers.swift in Sources */,
 				BF_C8AC7CA911930E4CA4CD872A13D49188 /* ObjectExpr.swift in Sources */,
+				1694729C22411C9D007E145A /* Style.swift in Sources */,
 				BF_730F5A04861CBCC7C521E7F416835314 /* Rule.swift in Sources */,
 				BF_70E93881EED439D0CCE2423BB9B335B5 /* Stylesheet.swift in Sources */,
 				BF_3B6C926D350E5AC6309607C0B846CAB9 /* StylesheetContext.swift in Sources */,
@@ -352,6 +357,7 @@
 				BF_1C5E5C64D385AB86B0E90312B9C5D075 /* Expression.swift in Sources */,
 				BF_7091FA2789BF8DF45B0D3067B5A9D289 /* UIKit+Helpers.swift in Sources */,
 				BF_4E565A1B7061975589CE2C54F98AE5B1 /* ObjectExpr.swift in Sources */,
+				1694729B22411C9D007E145A /* Style.swift in Sources */,
 				BF_ED0E0B69742A42B6771095AD14415C90 /* Rule.swift in Sources */,
 				BF_B9CD945DBFC53E917AC9D6B1E6C81018 /* Stylesheet.swift in Sources */,
 				BF_8E404DCF121E36BED199B324C1B8F829 /* StylesheetContext.swift in Sources */,
