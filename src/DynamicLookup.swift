@@ -6,7 +6,7 @@ public struct RuleDynamicLookup {
   public let id: String
   /// Returns the current style definitions.
   public var style: [String: Rule] {
-    guard let style = StylesheetManager.default.defs[id] else {
+    guard let style = StylesheetManager.default.properties(forStyle: id) else {
       warn("Unable to find style \(id).")
       return [:]
     }
@@ -19,7 +19,7 @@ public struct RuleDynamicLookup {
 
   public subscript(dynamicMember member: String) -> Rule {
     let manager = StylesheetManager.default
-    guard let rule = manager.rule(style: id, name: member) else {
+    guard let rule = manager.property(style: id, name: member) else {
       fatalError("error: \(id) does not declare \(member) as a property.")
     }
     return rule

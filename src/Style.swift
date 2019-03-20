@@ -7,6 +7,33 @@ public typealias Animator = Any
 #endif
 
 public final class Style {
+
+  public final class Context {
+    public static let `default` = Context()
+    #if canImport(UIKit)
+    /// Whether breakpoints should be ignored or not.
+    public var skipBreakpoints: Bool = true
+    /// Optional - The view that is currently being
+    public weak var view: UIView?
+    /// The render bounds for the property being evaluated in the next invocation of `rule(_:)`.
+    public var bounds: CGSize = UIScreen.main.bounds.size
+    /// User-defined values pushed to the expression evaluation engine.
+    public var userInfo: [String: CGFloat] = [:]
+
+    public init(
+      view: UIView? = nil, u
+      breakpoints: Bool = false,
+      bounds: CGSize = UIScreen.main.bounds.size
+    ) {
+      self.view = view
+      self.skipBreakpoints = !breakpoints
+      self.bounds = bounds
+    }
+    #endif
+
+    public init() { }
+  }
+
   /// Represent a single style definition.
   /// e.g.
   /// `Style: {foo: 1, bar: 2} # Container/default`
@@ -26,7 +53,7 @@ public final class Style {
     /// e.g.
     /// `layer.cornerRadius: 10`
     /// `animator-layer.cornerRadius: {_type: animator, curve: easeIn, duration: 1}`
-    var animators: [String: [String: Animator]] = [:]
+    var animators: [String: Animator] = [:]
 
     init(
       identifier: String,
@@ -73,11 +100,66 @@ public final class Style {
     container.definitions[property] = rule
   }
 
-  public func addAnimator(_ rule: Rule, property: String, breakpoint: String? = nil) {
-    
+  /// Adds a new animator to the container.
+  public func addAnimator(_ animator: Animator, property: String, breakpoint: String? = nil) {
+    guard let container = container(forBreakpoint: breakpoint) else {
+      warn("Cannot find breakpoint \(breakpoint!).")
+      return
+    }
+    container.animators[property] = animator
   }
 
+  public func property(named propertyName: String, context: Context = Context.default) -> Rule? {
+    let rule = defaultContainer.definitions[propertyName]
+    if context.skipBreakpoints {
+      return rule
+    }
+    let override = breakpointContainers.lazy.filter({ container in
+      guard
+          container.definitions[propertyName] != nil,
+          let breakpointExpression = container.breakpointExpression,
+          let value = try? breakpointExpression.evaluate(), value > 0 else {
+        return false
+      }
+      return true
+    }).first
+    return override?.definitions[propertyName] ?? rule
+  }
 
+  public func animator(named name: String, context: Context = Context.default) -> Animator? {
+    let rule = defaultContainer.animators[name]
+    if context.skipBreakpoints {
+      return rule
+    }
+    let override = breakpointContainers.lazy.filter({ container in
+      guard
+        container.animators[name] != nil,
+        let breakpointExpression = container.breakpointExpression,
+        let value = try? breakpointExpression.evaluate(), value > 0 else {
+          return false
+      }
+      return true
+    }).first
+    return override?.animators[name] ?? rule
+  }
+
+  public func properties(context: Context = Context.default) -> [String: Rule] {
+    var rules = defaultContainer.definitions
+    if context.skipBreakpoints {
+      return rules
+    }
+    for container in breakpointContainers {
+      guard
+        let breakpointExpression = container.breakpointExpression,
+        let value = try? breakpointExpression.evaluate(), value > 0 else {
+          continue
+      }
+      for (key, value) in container.definitions {
+        rules[key] = value
+      }
+    }
+    return rules
+  }
 
   private func container(forBreakpoint breakpoint: String? = nil) -> Container? {
     var container: Container?

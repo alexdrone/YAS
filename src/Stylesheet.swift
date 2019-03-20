@@ -1,7 +1,4 @@
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#endif
 
 public enum ParseError: Error {
   /// The filename is not set.
@@ -15,27 +12,19 @@ public enum ParseError: Error {
 }
 
 public final class StylesheetManager {
+  /// Reserved keywords.
+  private struct Reserved {
+    /// Root-level mapping used for cascade imports.
+    static let importKeyword = "_import"
+    /// Property prefix used for property animators.
+    static let animatorPrefix = "_animator_"
+  }
   /// Shared manager instance.
   public static let `default` = StylesheetManager()
-  /// The parsed Yaml document (internal only).
-  var defs: [String: [String: Rule]] = [:]
-  /// The filename for of the Yaml stylesheet.
-  private var file: String?
+  /// The style containers.
+  private var styles: [String: Style] = [:]
   /// The reource bundle where the stylesheet is located.
   private var bundle: Bundle?
-  #if canImport(UIKit)
-  /// Available animators.
-  public var animators: [String: [String: UIViewPropertyAnimator]] = [:]
-
-  /// Returns the animator for a given property.
-  /// Animators rule have the `animator-` prefix.
-  /// e.g.
-  /// layer.cornerRadius: 10
-  /// animator-layer.cornerRadius: {_type: animator, curve: easeIn, duration: 1}
-  public func animator(style: String, name: String) -> UIViewPropertyAnimator? {
-    return animators[style]?[name]
-  }
-  #endif
 
   init() {
     // Internal constructor.
@@ -43,24 +32,40 @@ public final class StylesheetManager {
 
   // MARK: Public
 
+  /// Returns the desired style.
+  public func properties(
+    forStyle style: String,
+    context: Style.Context = Style.Context.default
+  ) -> [String: Rule]? {
+    return styles[style]?.properties(context: context)
+  }
+
   /// Returns the rule named `name` of a specified style.
-  public func rule(style: String, name: String) -> Rule? {
-    return defs[style]?[name]
+  public func property(
+    style: String,
+    name: String,
+    context: Style.Context = Style.Context.default
+  ) -> Rule? {
+    return styles[style]?.property(named: name, context: context)
+  }
+
+  /// Returns the animator for a given property.
+  /// Animators rule have the `animator-` prefix.
+  /// e.g.
+  /// layer.cornerRadius: 10
+  /// animator-layer.cornerRadius: {_type: animator, curve: easeIn, duration: 1}
+  public func animator(
+    style: String,
+    name: String,
+    context: Style.Context = Style.Context.default
+  ) -> Animator? {
+    return styles[style]?.animator(named: name, context: context)
   }
 
   /// Parse and load the Yaml stylesheet.
   public func load(file: String, bundle: Bundle = Bundle.main) throws {
-    self.file = file
     try load(yaml: resolve(file: file, bundle: bundle))
     NotificationCenter.default.post(name: Notification.Name.StylesheetContextDidChange, object: nil)
-  }
-
-  /// Reloads the Yaml stylesheet.
-  public func reload() throws {
-    guard let file = file, let bundle = bundle else {
-      throw ParseError.fileNotSet
-    }
-    try load(file: file, bundle: bundle)
   }
 
   /// Parses the markup content passed as argument.
@@ -68,10 +73,6 @@ public final class StylesheetManager {
     let startTime = CFAbsoluteTimeGetCurrent()
 
     // Parses the top level definitions.
-    var yamlDefs: [String: [String: Rule]] = [:]
-    #if canImport(UIKit)
-    var yamlAnimators: [String: [String: UIViewPropertyAnimator]] = [:]
-    #endif
     var content: String = string
 
     // Sanitize the file format.
@@ -89,7 +90,7 @@ public final class StylesheetManager {
         return
       }
       let root = try validateRootNode(string)
-      for imported in root.mapping!["import"]?.array() ?? [] {
+      for imported in root.mapping![Reserved.importKeyword]?.array() ?? [] {
         print(imported)
         guard let fileName = imported.string?.replacingOccurrences(of: ".yaml", with: "") else {
           continue
@@ -102,52 +103,47 @@ public final class StylesheetManager {
     func parseRoot(_ string: String) throws {
       let root = try validateRootNode(string)
       for (key, value) in root.mapping ?? [:] {
-        guard key != "import" else { continue }
-        guard var defDic = value.mapping, let defKey = key.string else {
-          throw ParseError.malformedStylesheetStructure(message:"Definitions should be maps.")
+        guard key.string != Reserved.importKeyword else { continue }
+        guard var defDic = value.mapping, let key = key.string else {
+          throw ParseError.malformedStylesheetStructure(message:"A style should be a mapping.")
         }
+        // Create the style container.
+        let style = styles[key] ?? Style(identifier: key)
+        styles[key] = style
         // In yaml definitions can inherit from others using the <<: *ID expression. e.g.
         // myDef: &_myDef
         //   foo: 1
         // myOtherDef: &_myOtherDef
         //   <<: *_myDef
         //   bar: 2
-        var defs: [String: Rule] = [:]
         if let inherit = defDic["<<"]?.mapping {
           for (ik, iv) in inherit {
-            guard let isk = ik.string else {
-              throw ParseError.malformedStylesheetStructure(message: "Invalid rule key.")
+            guard let _ik = ik.string else {
+              throw ParseError.malformedStylesheetStructure(message: "Invalid key.")
             }
-            defs[isk] = try Rule(key: isk, value: iv)
+            style.addRule(try Rule(key: _ik, value: iv), property: _ik)
           }
         }
-
-        #if canImport(UIKit)
-        let animatorPrefix = "animator-"
+        // Properties.
         for (k, v) in defDic {
-          guard let sk = k.string, sk != "<<", !sk.hasPrefix(animatorPrefix) else { continue }
-          defs[sk] = try Rule(key: sk, value: v)
+          guard let _k = k.string, _k != "<<", !_k.hasPrefix(Reserved.animatorPrefix) else {
+            continue
+          }
+          style.addRule(try Rule(key: _k, value: v), property: _k)
         }
-        // Optional animator store.
-        var animators: [String: UIViewPropertyAnimator] = [:]
+        // Animators.
         for (k, v) in defDic {
-          guard let sk = k.string, sk.hasPrefix(animatorPrefix) else { continue }
-          let processedKey = sk.replacingOccurrences(of: animatorPrefix, with: "")
-          animators[processedKey] = try Rule(key: processedKey, value: v).animator
+          guard let _k = k.string,  _k.hasPrefix(Reserved.animatorPrefix) else {
+            continue
+          }
+          let pk = _k.replacingOccurrences(of: Reserved.animatorPrefix, with: "")
+          style.addAnimator(try Rule(key: pk, value: v).animator, property: pk)
         }
-        yamlAnimators[defKey] = animators
-        #endif
-
-        yamlDefs[defKey] = defs
       }
     }
 
     try resolveImports(string)
     try parseRoot(content)
-    self.defs = yamlDefs
-    #if canImport(UIKit)
-    self.animators = yamlAnimators
-    #endif
     debugLoadTime("Stylesheet.load", startTime: startTime)
   }
 
