@@ -44,8 +44,6 @@ public final class Style {
     /// The breakpoint name.
     /// Format: `{style}/{brekpoint}: {rules}`.
     public let breakpointName: String?
-    /// The expression used to evaluate whether this breakpoint should be active or not.
-    public let breakpointExpression: Expression?
     /// The defaul definitions for this `Style`.
     var definitions: [String: Rule] = [:]
     /// Property animators.
@@ -54,6 +52,8 @@ public final class Style {
     /// `layer.cornerRadius: 10`
     /// `animator-layer.cornerRadius: {_type: animator, curve: easeIn, duration: 1}`
     var animators: [String: Animator] = [:]
+    /// The expression used to evaluate whether this breakpoint should be active or not.
+    private let breakpointExpression: Expression?
 
     init(
       identifier: String,
@@ -63,6 +63,15 @@ public final class Style {
       self.identifier = identifier
       self.breakpointName = breakpointName
       self.breakpointExpression = breakpointExpression
+    }
+
+    public func evaluate(context: Context) -> Bool {
+      guard
+        let breakpointExpression = breakpointExpression,
+        let value = try? breakpointExpression.evaluate() else {
+        return false
+      }
+      return value > 0
     }
   }
   /// The style identifier.
@@ -111,49 +120,34 @@ public final class Style {
 
   public func property(named propertyName: String, context: Context = Context.default) -> Rule? {
     let rule = defaultContainer.definitions[propertyName]
-    if context.skipBreakpoints {
+    if context.skipBreakpoints || breakpointContainers.isEmpty {
       return rule
     }
-    let override = breakpointContainers.lazy.filter({ container in
-      guard
-          container.definitions[propertyName] != nil,
-          let breakpointExpression = container.breakpointExpression,
-          let value = try? breakpointExpression.evaluate(), value > 0 else {
-        return false
-      }
-      return true
-    }).first
-    return override?.definitions[propertyName] ?? rule
+    let override = breakpointContainers.lazy.filter {
+      $0.definitions[propertyName] != nil && $0.evaluate(context: context)
+    }.first
+    let overrideProperty = override?.definitions[propertyName]
+    return overrideProperty ?? rule
   }
 
   public func animator(named name: String, context: Context = Context.default) -> Animator? {
     let rule = defaultContainer.animators[name]
-    if context.skipBreakpoints {
+    if context.skipBreakpoints || breakpointContainers.isEmpty {
       return rule
     }
-    let override = breakpointContainers.lazy.filter({ container in
-      guard
-        container.animators[name] != nil,
-        let breakpointExpression = container.breakpointExpression,
-        let value = try? breakpointExpression.evaluate(), value > 0 else {
-          return false
-      }
-      return true
-    }).first
+    let override = breakpointContainers.lazy.filter {
+      $0.animators[name] != nil && $0.evaluate(context: context)
+    }.first
     return override?.animators[name] ?? rule
   }
 
   public func properties(context: Context = Context.default) -> [String: Rule] {
     var rules = defaultContainer.definitions
-    if context.skipBreakpoints {
+    if context.skipBreakpoints || breakpointContainers.isEmpty {
       return rules
     }
     for container in breakpointContainers {
-      guard
-        let breakpointExpression = container.breakpointExpression,
-        let value = try? breakpointExpression.evaluate(), value > 0 else {
-          continue
-      }
+      guard container.evaluate(context: context) else { continue }
       for (key, value) in container.definitions {
         rules[key] = value
       }
@@ -162,14 +156,10 @@ public final class Style {
   }
 
   private func container(forBreakpoint breakpoint: String? = nil) -> Container? {
-    var container: Container?
-    if
-      let breakpoint = breakpoint,
-      let breakpointContainer = breakpointContainers.filter({ $0.identifier != breakpoint}).first {
-      container = breakpointContainer
-    } else {
-      container = defaultContainer
+    guard let breakpoint = breakpoint else {
+      return defaultContainer
     }
-    return container
+    let breakpointContainer = breakpointContainers.filter { $0.identifier != breakpoint }.first
+    return breakpointContainer ?? defaultContainer
   }
 }

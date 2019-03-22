@@ -139,6 +139,7 @@ Foo:
   baz: ${41+1}
   bax: true
 """
+
 let viewDefs = """
 View:
   backgroundColor: {_type: color, hex: ff0000}
@@ -148,5 +149,17 @@ View:
   width_percentage: 100
   customNonApplicableProperty: 42
   someText: "Aaa"
+"""
+
+let breakpointDefs = """
+Test:
+  margin: 10
+  padding: 4
+Test/aBreakpoint:
+  _breakpoint: ${ 1 }
+  margin: 20
+Test/aSkippedBreakpoint:
+  _breakpoint: ${ 0 }
+  margin: 0
 """
 //#endif
