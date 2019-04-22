@@ -132,7 +132,7 @@ extension UIImageView {
 
 public extension UIImage {
   /// Tint the image with the desired color.
-  public func withTintColor(_ color: UIColor) -> UIImage {
+  func withTintColor(_ color: UIColor) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
     let context: CGContext = UIGraphicsGetCurrentContext()!
     context.translateBy(x: 0, y: self.size.height)
@@ -148,7 +148,7 @@ public extension UIImage {
   }
 
   /// Resize an image.
-  public func byResizingToTargetHeight(_ targetHeight: CGFloat) -> UIImage {
+  func byResizingToTargetHeight(_ targetHeight: CGFloat) -> UIImage {
     let size = self.size
     let heightRatio = targetHeight / size.height
     let newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)

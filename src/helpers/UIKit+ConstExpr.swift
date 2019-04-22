@@ -225,6 +225,8 @@ public class Screen {
       case .regular: return .regular
       case .compact: return .compact
       case .unspecified: return .unspecified
+      @unknown default:
+         return .unspecified
       }
     }
 
@@ -234,6 +236,8 @@ public class Screen {
       case .regular: return .regular
       case .compact: return .compact
       case .unspecified: return .unspecified
+      @unknown default:
+        return .unspecified
       }
     }
   }

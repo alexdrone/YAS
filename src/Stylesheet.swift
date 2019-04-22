@@ -98,7 +98,6 @@ public final class StylesheetManager {
       }
       let root = try validateRootNode(string)
       for imported in root.mapping![Reserved.importKeyword]?.array() ?? [] {
-        print(imported)
         guard let fileName = imported.string?.replacingOccurrences(of: ".yaml", with: "") else {
           continue
         }

@@ -113,27 +113,27 @@ struct UIKitObjectExpr {
 public extension Rule {
   /// Returns this rule evaluated as a float.
   /// - note: The default value is 0.
-  public var cgFloat: CGFloat {
+  var cgFloat: CGFloat {
     return (nsNumber as? CGFloat) ?? 0
   }
   /// Returns this rule evaluated as a `UIFont`.
-  public var font: UIFont {
+  var font: UIFont {
     return cast(type: .object, default: UIFont.init())
   }
 
   /// Returns this rule evaluated as a `UIColor`.
   /// - note: The default value is `UIColor.black`.
-  public var color: UIColor {
+  var color: UIColor {
     return cast(type: .object, default: UIColor.init())
   }
 
   /// Returns this rule as a `UIViewPropertyAnimator`.
-  public var animator: UIViewPropertyAnimator {
+  var animator: UIViewPropertyAnimator {
     return cast(type: .object, default: UIViewPropertyAnimator())
   }
 
   /// Returns this rule evaluated as a `NSAttributedStringBuilder`.
-  public var textStyle: TextStyle {
+   var textStyle: TextStyle {
     return cast(type: .object, default: TextStyle())
   }
 }
@@ -146,15 +146,19 @@ func objectExprRegisterDefaults(_ registry: ObjectExprRegistry) {
   #if canImport(UIKit)
   registry.export(ObjectExprFactory(
     type: UIKitObjectExpr.Font.self,
-    name: "font"))
+    name: "font",
+    builder: { return UIKitObjectExpr.Font() }))
   registry.export(ObjectExprFactory(
     type: UIKitObjectExpr.Color.self,
-    name: "color"))
+    name: "color",
+    builder: { return UIKitObjectExpr.Color() }))
   registry.export(ObjectExprFactory(
     type: UIKitObjectExpr.Animator.self,
-    name: "animator"))
+    name: "animator",
+    builder: { return UIKitObjectExpr.Animator() }))
   registry.export(ObjectExprFactory(
     type: UIKitObjectExpr.Text.self,
-    name: "text"))
+    name: "text",
+    builder: { return UIKitObjectExpr.Text() }))
   #endif
 }

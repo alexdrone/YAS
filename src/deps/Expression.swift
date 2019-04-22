@@ -1523,11 +1523,11 @@ public struct AnyExpression: CustomStringConvertible {
       }
       var index: Int?
       if AnyExpression.isNil(value) {
-        index = values.index(where: { AnyExpression.isNil($0) })
+        index = values.firstIndex(where: { AnyExpression.isNil($0) })
       } else if let lhs = value as? AnyHashable {
-        index = values.index(where: { $0 as? AnyHashable == lhs })
+        index = values.firstIndex(where: { $0 as? AnyHashable == lhs })
       } else if let lhs = value as? [AnyHashable] {
-        index = values.index(where: { ($0 as? [AnyHashable]).map { $0 == lhs } ?? false })
+        index = values.firstIndex(where: { ($0 as? [AnyHashable]).map { $0 == lhs } ?? false })
       }
       if index == nil {
         values.append(value)

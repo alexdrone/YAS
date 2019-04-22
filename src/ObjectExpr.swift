@@ -100,11 +100,10 @@ public class ObjectExprFactory<T: ObjectExpr>: ObjectExprFactoryProtocol {
   public init(
     type: T.Type,
     name: String,
-    ruleType: Rule.ValueType = .object,
-    builder: @escaping () -> T = { T() }
+    builder: @escaping () -> T
   ) {
     self.name = name
-    self.returnType = ruleType
+    self.returnType = Rule.ValueType.object
     self.builder = builder
   }
 
