@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "1020"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "NT_B446D05F5ED8FEF7140D5BD3F1795C17"
+               BlueprintIdentifier = "E8C22B6F9FF2F06729D4365F109970F3"
                BuildableName = "Test.xctest"
                BlueprintName = "Test"
                ReferencedContainer = "container:YAS.xcodeproj">
@@ -33,7 +33,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "NT_B446D05F5ED8FEF7140D5BD3F1795C17"
+               BlueprintIdentifier = "E8C22B6F9FF2F06729D4365F109970F3"
                BuildableName = "Test.xctest"
                BlueprintName = "Test"
                ReferencedContainer = "container:YAS.xcodeproj">
@@ -43,7 +43,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "NT_B446D05F5ED8FEF7140D5BD3F1795C17"
+            BlueprintIdentifier = "E8C22B6F9FF2F06729D4365F109970F3"
             BuildableName = "Test.xctest"
             BlueprintName = "Test"
             ReferencedContainer = "container:YAS.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "NT_B446D05F5ED8FEF7140D5BD3F1795C17"
+            BlueprintIdentifier = "E8C22B6F9FF2F06729D4365F109970F3"
             BuildableName = "Test.xctest"
             BlueprintName = "Test"
             ReferencedContainer = "container:YAS.xcodeproj">
@@ -103,7 +103,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "NT_B446D05F5ED8FEF7140D5BD3F1795C17"
+            BlueprintIdentifier = "E8C22B6F9FF2F06729D4365F109970F3"
             BuildableName = "Test.xctest"
             BlueprintName = "Test"
             ReferencedContainer = "container:YAS.xcodeproj">

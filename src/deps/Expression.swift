@@ -139,8 +139,8 @@ public final class Expression: CustomStringConvertible {
     }
 
     /// Required by the Hashable protocol
-    public var hashValue: Int {
-      return name.hashValue
+    public func hash(into hasher: inout Hasher) {
+      hasher.combine(name)
     }
 
     /// Equatable implementation

@@ -663,14 +663,14 @@ extension YAMLNode {
 // MARK: Hashable
 
 extension YAMLNode: Hashable {
-  var hashValue: Int {
+  func hash(into hasher: inout Hasher) {
     switch self {
     case let .scalar(scalar):
-      return scalar.string.hashValue
+      hasher.combine(scalar.string)
     case let .mapping(mapping):
-      return mapping.count
+      hasher.combine(mapping.count)
     case let .sequence(sequence):
-      return sequence.count
+      hasher.combine(sequence.count)
     }
   }
 
@@ -1917,8 +1917,8 @@ extension YAMLTag: CustomStringConvertible {
 }
 
 extension YAMLTag: Hashable {
-  var hashValue: Int {
-    return name.hashValue
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
   }
 
   static func == (lhs: YAMLTag, rhs: YAMLTag) -> Bool {
